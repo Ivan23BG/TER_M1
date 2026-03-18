@@ -3,11 +3,11 @@ import random
 import matplotlib.pyplot as plt
 
 
-
 def random_3_regular_graph(n):
     if n < 4 or (3 * n) % 2 != 0:
         raise ValueError("No 3-regular graph exists for this n")
     return nx.random_regular_graph(3, n)
+
 
 def satisfying_partition(G, max_attempts=100):
     nodes = list(G.nodes())
@@ -43,6 +43,7 @@ def satisfying_partition(G, max_attempts=100):
             return A, B
     
     return A, B
+
 
 def is_satisfying(G, A, B):
     for v in G.nodes():
@@ -97,9 +98,7 @@ def plot_partitioned_graph(G, A, B, figsize=(8,6), node_size=600, font_size=12):
     plt.show()
 
 
-
-
-# Test small graphs
+# Preuve que ca marche pas pour K4 et K3,3
 G = nx.complete_graph(4)
 A, B = satisfying_partition(G)
 print("K4 valid:", is_satisfying(G, A, B))
@@ -108,13 +107,9 @@ G = nx.complete_bipartite_graph(3, 3)
 A, B = satisfying_partition(G)
 print("K3,3 valid:", is_satisfying(G, A, B))
 
-# Random 3-regular graph
-G = nx.random_regular_graph(3, 10)
-A, B = satisfying_partition(G)
 
-# Create a random 3-regular graph
+# On retrouve la partition satisfaisante pour un graphe 3-regulier aleatoire
 G = nx.random_regular_graph(3, 10)
-
 # Get partitions
 A, B = satisfying_partition(G)
 

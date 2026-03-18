@@ -8,6 +8,10 @@
 
 \section{Quelques preuves}\label{sec:s_2}
 
+On démontre dans cette section quelques résultats importants sur les partitions satisfaisantes.
+On montrera notamment des propriétés sur la connexité des graphes ainsi que des résultats sur les graphes \(k\)-réguliers pour \(k \leq 4\).
+Le problème reste ouvert pour les graphes \(k\)-réguliers avec \(k \geq 5\).
+
 \subsection{Le cas des graphes non connexes}\label{subsec:ss2_1}
 
 On montre dans cette partie que tout graphe non connexe admet une partition satisfaisante.
@@ -82,9 +86,9 @@ On considère alors les propositions suivantes:
     Soit \(v\) un sommet mauvais. Alors \(d_{\mathrm{ext}}(v) \geq 2\) et donc \(d_{\mathrm{int}}(v) \leq 1\).
     En déplaçant \(v\), on perd \(d_{\mathrm{int}}(v)\) arêtes internes et on gagne \(d_{\mathrm{ext}}(v)\) arêtes internes.
     Ainsi,
-    \[
+    \begin{equation*}
     \Delta f \geq 2 - 1 = 1.
-    \]
+    \end{equation*}
     Donc \(f\) augmente strictement.
 \end{proof}
 
@@ -105,7 +109,7 @@ On analyse alors la structure de \(B\).
 
 Si \(B\) contient exactement \(3\) sommets alors \(G\) est isomorphe à \(K_4\).
 
-\(B\) ne peut pas contenir exactement \(4\) sommets car \(G\) est \(3\)-régulier.
+\(B\) ne peut pas contenir exactement \(4\) sommets car \(G\) est \(3\)-régulier (donc \(\abs{V}\) est paire).
 
 Si \(B\) contient exactement \(5\) sommets on a 2 cas possibles:
 \begin{itemize}
@@ -113,9 +117,55 @@ Si \(B\) contient exactement \(5\) sommets on a 2 cas possibles:
     \item soit \(x\), \(y\) et \(z\) ne sont pas tous les trois liés à un même sommet de \(B\), alors \(G\) contient deux cycles disjoints de longueur 3 et on a trouvé une autre partition satisfaisante.
 \end{itemize}
 
-% to fill
-\medskip
 
-Ainsi, si \(G\) n’est isomorphe ni à \(K_4\) ni à \(K_{3,3}\), le processus ne peut pas s’arrêter sur une partition non satisfaisante.
+Si \(B\) contient au moins \(7\) sommets, alors \(B\) contient au moins un sommet \(w\) qui n’est pas lié à \(x\), \(y\) ou \(z\).
+Alors \(w\) est lié à un autre sommet de \(B\) (car \(G\) est \(3\)-régulier).
+On peut alors considérer la partition suivante.
+
+Si il existe un cycle \(C \in B \setminus \{x, y, z\}\) qui contient \(w\), alors on considère la partition \(C, V \setminus C\)
+et on répète le processus décrit précédemment.
+Comme \(C\) contient au moins 3 sommets, il ne sera pas vidé par le processus et on trouvera une partition satisfaisante.
+
+Sinon, il existe un cycle \(C\) dans \(V\) qui contient \(w\), un sommet parmi \(x\), \(y\) ou \(z\) (disons \(x\)) et au moins un autre sommet de \(B\) (disons \(w'\)).
+On considère alors la partition \(C, V \setminus C\) et on répète le processus décrit précédemment.
+
+Ainsi, si \(G\) n’est isomorphe ni à \(K_4\) ni à \(K_{3,3}\), on peut répéter le processus un nombre fini de fois pour trouver une partition satisfaisante de \(G\).
 
 On en déduit que \(G\) admet une partition satisfaisante.
+
+
+\subsubsection{Le cas \(k = 4\)}
+
+Soit \(G = (V,E)\) un graphe \(4\)-régulier connexe.
+On va montrer que \(G\) admet une partition satisfaisante sauf si \(G\) est isomorphe à \(K_5\).
+
+On considère une partition \((A,B)\) de \(V\), et on dit qu’un sommet est mauvais si
+
+\begin{equation*}
+    d_{\mathrm{ext}}(v) > d_{\mathrm{int}}(v).
+\end{equation*}
+
+Comme \(G\) est \(4\)-régulier, cela équivaut à \(d_{\mathrm{ext}}(v) \geq 3\).
+
+On considère le même processus que dans le cas \(k=3\), en déplaçant les sommets mauvais tant que leur partie contient au moins deux sommets, et la fonction
+
+\begin{equation*}
+    f(A,B) = |E(A)| + |E(B)|.
+\end{equation*}
+
+Lorsqu’on déplace un sommet mauvais \(v\), on a
+
+\begin{equation*}
+    \Delta f \geq d_{\mathrm{ext}}(v) - d_{\mathrm{int}}(v) \geq 3 - 1 = 2,
+\end{equation*}
+
+donc \(f\) augmente strictement. Le processus termine donc.
+
+Si le processus s’arrête sur une partition non satisfaisante, alors toute partie contenant un sommet mauvais est un singleton (d'après la proposition~\ref{prop:2}). On peut donc supposer sans perte de généralité que \(A = \{v\}\). % chktex 44
+
+Le sommet \(v\) est alors adjacent à quatre sommets de \(B\).
+Si \(|V| = 5\), alors \(G\) est isomorphe à \(K_5\), qui n’admet pas de partition satisfaisante.
+
+Sinon, on peut reprendre la démonstration pour \(k=3\) et montrer qu’il existe dans \(B\) un cycle \(C\) de longueur au moins 3 tel que la partition \((C, V \setminus C)\) permet de relancer le processus sans vider \(C\), ce qui conduit à une partition satisfaisante.
+
+Ainsi, tout graphe \(4\)-régulier connexe non isomorphe à \(K_5\) admet une partition satisfaisante.
