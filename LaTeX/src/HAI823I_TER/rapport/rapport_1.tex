@@ -10,4 +10,112 @@
 
 \subsection{Le cas des graphes non connexes}\label{subsec:ss2_1}
 
-\subsection{Les cas \(k \leq 3\)}\label{subsec:ss2_2}
+On montre dans cette partie que tout graphe non connexe admet une partition satisfaisante.
+
+Soit \(G = (V, E)\) un graphe non connexe.
+Soit \(A\) une composante connexe de \(G\) et \(B = V \setminus A\) le reste des sommets.
+
+On considère la partition \((A, B)\) de \(V\).
+Soit \(x\) un sommet de \(A\). Le degré interne de \(x\) dans \(A\) est au moins 1 car \(A\) est une composante connexe.
+Son degré externe (donc dans \(B\)) est de 0 car il n'y a pas d'arêtes entre \(A\) et \(B\).
+Ainsi, pour tout sommet \(x\) de \(A\), on a \(d_A(x) \geq d_B(x)\).
+
+Soit \(y\) un sommet de \(B\). Le degré externe de \(y\) dans \(A\) est de 0 car il n'y a pas d'arêtes entre \(A\) et \(B\).
+Comme le degré ne peut pas être négatif, on a \(d_B(y) \geq 0\).
+Ainsi, pour tout sommet \(y\) de \(B\), on a \(d_B(y) \geq d_A(y)\).
+
+On a donc montré que pour tout sommet \(x\) de \(V\), le degré interne de \(x\) est supérieur ou égal à son degré externe pour la partition \((A, B)\).
+Ainsi, \((A, B)\) est une partition satisfaisante de \(G\).
+
+Dans la suite on ne considérera donc que des graphes connexes, car les graphes non connexes admettent toujours une partition satisfaisante.
+
+\subsection{Les cas \(k \leq 4\)}\label{subsec:ss2_2}
+
+\subsubsection{Le cas \(k = 1\)}\label{subsubsec:ss2_2_1}
+
+Soit \(G\) un graphe \(1\)-régulier connexe.
+\(G\) est forcément le graphe à deux sommets reliés par une arête.
+Il n'admet pas de partition satisfaisante, car les deux sommets ont un degré interne de 0 et un degré externe de 1.
+
+\subsubsection{Le cas \(k = 2\)}\label{subsubsec:ss2_2_2}
+
+Soit \(G\) un graphe \(2\)-régulier connexe.
+\(G\) est un cycle de longueur \(n \geq 3\).
+Soit \(x\) un sommet de \(G\) et \(y\) un sommet adjacent à \(x\).
+
+Si \(n = 3\), alors \(G\) est un triangle et n'admet pas de partition satisfaisante car le sommet dans la partie de taille 1 a un degré interne de 0 et un degré externe de 2.
+
+Si \(n \geq 4\), alors on peut partitionner les sommets de \(G\) en deux parties: \(({x, y}, V \setminus \{x, y\})\).
+
+Soit \(z\) un sommet de \(G\).
+Si \(z\) est dans la partie \(\{x, y\}\), alors son degré interne est de 1 (car il est adjacent à l'autre sommet de la partie) et son degré externe est de 1 (car il est adjacent à un sommet de l'autre partie).
+Si \(z\) est dans la partie \(V \setminus \{x, y\}\), alors son degré interne est de au moins 1 (il ne peut pas être lié à \(x\) et \(y\) car \(n \geq 4\)) et son degré externe est de au plus 1.
+
+Ainsi, pour tout sommet \(z\) de \(G\), on a \(d_{\mathrm{int}}(z) \geq d_{\mathrm{ext}}(z)\) pour la partition \(({x, y}, V \setminus \{x, y\})\).
+Donc \(G\) admet une partition satisfaisante.
+
+\subsubsection{Le cas \(k = 3\)}
+
+Soit \(G = (V,E)\) un graphe \(3\)-régulier connexe.
+On va montrer que \(G\) admet une partition satisfaisante, sauf si \(G\) est isomorphe à \(K_4\) ou \(K_{3,3}\).
+
+Soit \((A,B)\) une partition de \(V\) telle que \(A \neq \emptyset\) et \(B \neq \emptyset\).
+
+On dit qu’un sommet \(v \in V\) est \emph{mauvais} si \(d_{\mathrm{ext}}(v) > d_{\mathrm{int}}(v)\).
+Comme \(G\) est \(3\)-régulier, cela équivaut à \(d_{\mathrm{ext}}(v) \geq 2\).
+
+On considère le processus suivant: tant qu’il existe un sommet mauvais \(v\), on le déplace dans l’autre partie, à condition que sa partie contienne au moins deux sommets.
+
+On définit la fonction \(f\) comme suit:
+\begin{equation*}
+    f(A,B) = |E(A)| + |E(B)|
+\end{equation*}
+où \(E(A)\) (resp. \(E(B)\)) désigne l’ensemble des arêtes internes à \(A\) (resp. \(B\)).
+
+On considère alors les propositions suivantes:
+
+\begin{proposition}
+    A chaque déplacement autorisé, la fonction \(f\) augmente strictement.
+\end{proposition}
+
+\begin{proof}
+    Soit \(v\) un sommet mauvais. Alors \(d_{\mathrm{ext}}(v) \geq 2\) et donc \(d_{\mathrm{int}}(v) \leq 1\).
+    En déplaçant \(v\), on perd \(d_{\mathrm{int}}(v)\) arêtes internes et on gagne \(d_{\mathrm{ext}}(v)\) arêtes internes.
+    Ainsi,
+    \[
+    \Delta f \geq 2 - 1 = 1.
+    \]
+    Donc \(f\) augmente strictement.
+\end{proof}
+
+Comme \(f\) est bornée par \(|E|\), le processus termine.
+
+\begin{proposition}\label{prop:2}
+    Si le processus s’arrête et que la partition n’est pas satisfaisante, alors l’une des deux parties est un singleton.
+\end{proposition}
+
+\begin{proof}
+    Si un sommet mauvais appartient à une partie de taille au moins 2, alors il pourrait être déplacé, ce qui contredit l’arrêt du processus.
+    Donc tout sommet mauvais appartient à une partie de taille 1.
+\end{proof}
+
+Supposons maintenant que le processus s’arrête sur une partition non satisfaisante. Par la proposition~\ref{prop:2}, on peut supposer sans perte de généralité que \(A = \{v\}\). % chktex 44
+Alors \(v\) a ses trois voisins dans \(B\), qu'on note \(x\), \(y\) et \(z\).
+On analyse alors la structure de \(B\). 
+
+Si \(B\) contient exactement \(3\) sommets alors \(G\) est isomorphe à \(K_4\).
+
+\(B\) ne peut pas contenir exactement \(4\) sommets car \(G\) est \(3\)-régulier.
+
+Si \(B\) contient exactement \(5\) sommets on a 2 cas possibles:
+\begin{itemize}
+    \item soit \(x\), \(y\) et \(z\) sont tous les trois liés à un même sommet de \(B\), alors \(G\) est isomorphe à \(K_{3,3}\),
+    \item soit \(x\), \(y\) et \(z\) ne sont pas tous les trois liés à un même sommet de \(B\), alors \(G\) contient deux cycles disjoints de longueur 3 et on a trouvé une autre partition satisfaisante.
+\end{itemize}
+
+% to fill
+\medskip
+
+Ainsi, si \(G\) n’est isomorphe ni à \(K_4\) ni à \(K_{3,3}\), le processus ne peut pas s’arrêter sur une partition non satisfaisante.
+
+On en déduit que \(G\) admet une partition satisfaisante.
