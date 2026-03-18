@@ -1,10 +1,30 @@
 #!/usr/bin/env bash
-
-# Activate environment
+# Initial setup
+python3 -m venv .venv
 source .venv/bin/activate
+    pip install -r requirements.txt > /dev/null 2>&1
 
-# Install dependencies if missing
-pip install -r requirements.txt > /dev/null 2>&1
 
-# Run your project
-python src/main.py
+# Menu system
+case "$1" in
+  run)
+    python Python/main.py
+    ;;
+  test)
+    echo "Running tests..."
+    echo "to fill in"
+    ;;
+  latex)
+    cd LaTeX && python run.py
+    ;;
+  clean)
+    rm -rf __pycache__ .pytest_cache
+    ;;
+  *)
+    echo "Usage:"
+    echo "./start.sh run     ->   run project"
+    echo "./start.sh test    ->   run tests"
+    echo "./start.sh latex   ->   compile LaTeX"
+    echo "./start.sh clean   ->   clean files"
+    ;;
+esac
