@@ -99,13 +99,13 @@ def plot_partitioned_graph(G, A, B, figsize=(8,6), node_size=600, font_size=12):
 
 
 # Preuve que ca marche pas pour K4 et K3,3
-G = nx.complete_graph(4)
-A, B = satisfying_partition(G)
-print("K4 valid:", is_satisfying(G, A, B))
+# G = nx.complete_graph(4)
+# A, B = satisfying_partition(G)
+# print("K4 valid:", is_satisfying(G, A, B))
 
-G = nx.complete_bipartite_graph(3, 3)
-A, B = satisfying_partition(G)
-print("K3,3 valid:", is_satisfying(G, A, B))
+# G = nx.complete_bipartite_graph(3, 3)
+# A, B = satisfying_partition(G)
+# print("K3,3 valid:", is_satisfying(G, A, B))
 
 
 # On retrouve la partition satisfaisante pour un graphe 3-regulier aleatoire
