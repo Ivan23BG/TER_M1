@@ -109,7 +109,7 @@ def plot_partitioned_graph(G, A, B, figsize=(8,6), node_size=600, font_size=12):
 
 
 # On retrouve la partition satisfaisante pour un graphe 3-regulier aleatoire
-G = nx.random_regular_graph(3, 10)
+G = nx.random_regular_graph(3, 8)
 # Get partitions
 A, B = satisfying_partition(G)
 
