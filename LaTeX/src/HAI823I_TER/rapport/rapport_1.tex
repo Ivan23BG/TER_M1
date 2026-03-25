@@ -60,6 +60,37 @@ Donc \(G\) admet une partition satisfaisante.
 
 \subsubsection{Le cas \(k = 3\)}
 
+% solution alternative
+% si n = 4 alors G est isomorphe à K4 donc non satisfaisant
+% si n = 6 alors plusieurs cas possibles:
+% - les 3 voisins de v sont liés à un même sommet de B alors G est isomorphe à K3,3 donc non satisfaisant
+% - les 3 voisins de v ne sont pas tous liés à un même sommet de B alors G contient deux cycles disjoints de longueur 3 et on a trouvé une autre partition satisfaisante
+% si n >= 8 on veut montrer que tout graphe 3 regulier de degre au moins 8 contient deux cycles disjoints (de longueur au moins 3), on pourrait alors faire la partition à partir de ces deux cycles 
+
+% soit G un graphe 3 regulier de degre au moins 8, on veut montrer que G contient deux cycles disjoints de longueur au moins 3
+% commencons deja par trouver un cycle
+% si G ne contient pas de cycle alors il est un arbre et ne peut pas être 3 regulier
+% donc G contient au moins un cycle.
+% on considere un plus petit cycle C de G et on s'interesse à la structure de G' = G \ C
+% si G' ne contient pas de cycle, alors G' est soit une foret soit un arbre
+% si G' a un seul sommet, le cycle le plus court est de longueur 7, c'est impossible car G est 3 regulier (et donc chaque sommet de C est lié à exactement un sommet de G')
+% si G' a deux sommets, le cycle le plus court est de longueur 6, encore une fois c'est impossible car G est 3 regulier
+% si G' a 3 sommets, le cycle est de longueur 5 et on trouve alors un cycle de longueur 3 plus court que C, ce qui est une contradiction
+% si 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Soit \(G = (V,E)\) un graphe \(3\)-régulier connexe.
 On va montrer que \(G\) admet une partition satisfaisante, sauf si \(G\) est isomorphe à \(K_4\) ou \(K_{3,3}\).
 
