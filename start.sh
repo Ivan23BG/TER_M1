@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Initial setup
 # python3 -m venv .venv
-# source .venv/bin/activate
+source .venv/bin/activate
 # pip install -r requirements.txt > /dev/null 2>&1
 # pip freeze > requirements.txt
 # pip install -r requirements.txt > /dev/null 2>&1
