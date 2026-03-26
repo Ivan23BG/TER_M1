@@ -218,35 +218,20 @@ def is_satisfying(G, A, B):
     return True
 
 
-def plot_partitioned_graph(G, A, B, figsize=(8,6), node_size=600, font_size=12):
-    """
-    Plot a NetworkX graph with partitioned nodes and colored edges.
-    
-    Parameters:
-    - G: networkx.Graph
-    - A: set of nodes in partition A
-    - B: set of nodes in partition B
-    - figsize: tuple, figure size
-    - node_size: int, node size
-    - font_size: int, label font size
-    """
-    # Node colors
+def plot_partitioned_graph(G, A, B, pos, ax, title="", node_size=600, font_size=12):
     color_map = ["skyblue" if v in A else "salmon" for v in G.nodes()]
     
-    # Edge colors
     edge_colors = []
     for u, v in G.edges():
         if (u in A and v in A) or (u in B and v in B):
-            edge_colors.append("green")  # internal
+            edge_colors.append("green")
         else:
-            edge_colors.append("red")    # external
+            edge_colors.append("red")
     
-    # Draw
-    plt.figure(figsize=figsize)
-    pos = nx.spring_layout(G)  # nice layout
     nx.draw(
         G,
         pos,
+        ax=ax,
         with_labels=True,
         node_color=color_map,
         edge_color=edge_colors,
@@ -254,7 +239,24 @@ def plot_partitioned_graph(G, A, B, figsize=(8,6), node_size=600, font_size=12):
         font_size=font_size,
         width=2
     )
-    plt.show()
+    
+    ax.set_title(title)
+
+
+def save_graph(G, filename="graphs.txt"):
+    with open(filename, "a") as f:
+        edges = list(G.edges())
+        f.write(repr(edges) + "\n")
+
+
+def load_graph(line_number, filename="graphs.txt"):
+    with open(filename, "r") as f:
+        lines = f.readlines()
+    
+    edges = eval(lines[line_number].strip())
+    G = nx.Graph()
+    G.add_edges_from(edges)
+    return G
 
 
 # Preuve que ca marche pas pour K4 et K3,3
@@ -268,11 +270,22 @@ def plot_partitioned_graph(G, A, B, figsize=(8,6), node_size=600, font_size=12):
 
 
 # On retrouve la partition satisfaisante pour un graphe 3-regulier aleatoire
-G = nx.random_regular_graph(3, 16)
-# Get partitions
-# A, B = satisfying_partition(G)
-A, B = satisfying_partition_3_regular(G)
+G = nx.random_regular_graph(3, 10)
+# G = load_graph(0)  # load the first graph from file 
+save_graph(G)
 
+# Fix layout
+pos = nx.spring_layout(G, seed=42)
 
-# Plot
-plot_partitioned_graph(G, A, B)
+# Compute partitions
+A1, B1 = satisfying_partition(G)
+A2, B2 = satisfying_partition_3_regular(G)
+
+# Create ONE figure with 2 axes
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+# Draw both on the same layout
+plot_partitioned_graph(G, A1, B1, pos, ax=axes[0], title="Heuristic partition")
+plot_partitioned_graph(G, A2, B2, pos, ax=axes[1], title="Cycle-based partition")
+
+plt.show()
