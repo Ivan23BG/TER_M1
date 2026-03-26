@@ -40,6 +40,12 @@ This script provides access to:
 ```bash
 ./start.sh python
 ```
+Before running the python tests, ensure you have created the appropriate virtual environment and installed the required dependencies. This can be done with the following commands:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
+pip install -r requirements.txt
+```
 
 ## Project Structure
 - **LaTeX Files**: Generate the project report documentation
