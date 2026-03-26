@@ -60,110 +60,83 @@ Donc \(G\) admet une partition satisfaisante.
 
 \subsubsection{Le cas \(k = 3\)}
 
-% solution alternative
-% si n = 4 alors G est isomorphe à K4 donc non satisfaisant
-% si n = 6 alors plusieurs cas possibles:
-% - les 3 voisins de v sont liés à un même sommet de B alors G est isomorphe à K3,3 donc non satisfaisant
-% - les 3 voisins de v ne sont pas tous liés à un même sommet de B alors G contient deux cycles disjoints de longueur 3 et on a trouvé une autre partition satisfaisante
-% si n >= 8 on veut montrer que tout graphe 3 regulier de degre au moins 8 contient deux cycles disjoints (de longueur au moins 3), on pourrait alors faire la partition à partir de ces deux cycles 
+On montre dans cette partie que tout graphe \(3\)-régulier connexe admet une partition satisfaisante, sauf s’il est isomorphe à \(K_4\) ou \(K_{3,3}\). On travaille sur le degré de \(G\).
 
-% soit G un graphe 3 regulier de degre au moins 8, on veut montrer que G contient deux cycles disjoints de longueur au moins 3
-% commencons deja par trouver un cycle
-% si G ne contient pas de cycle alors il est un arbre et ne peut pas être 3 regulier
-% donc G contient au moins un cycle.
-% on considere un plus petit cycle C de G et on s'interesse à la structure de G' = G \ C
-% si G' ne contient pas de cycle, alors G' est soit une foret soit un arbre
-% si G' a un seul sommet, le cycle le plus court est de longueur 7, c'est impossible car G est 3 regulier (et donc chaque sommet de C est lié à exactement un sommet de G')
-% si G' a deux sommets, le cycle le plus court est de longueur 6, encore une fois c'est impossible car G est 3 regulier
-% si G' a 3 sommets, le cycle est de longueur 5 et on trouve alors un cycle de longueur 3 plus court que C, ce qui est une contradiction
-% si 
+Si \(n = 4\), alors \(G\) est isomorphe à \(K_4\) et n’admet pas de partition satisfaisante.
 
+Si \(n = 6\), alors on a deux cas:
+\begin{itemize}
+    \item si \(G \simeq K_{3,3}\), alors \(G\) n’admet pas de partition satisfaisante,
+    \item sinon, \(G\) contient deux cycles disjoints de longueur 3 et ils forment alors une partition satisfaisante.
+\end{itemize}
 
+Si \(n \geq 8\), alors on montre que \(G\) contient deux cycles disjoints et qu'à partir de ces deux cycles on peut construire une partition satisfaisante.
 
+\begin{proposition}
+    Tout graphe \(3\)-régulier contient un cycle.
+\end{proposition}
 
+\begin{proof}
+    Si \(G\) ne contient pas de cycle, alors \(G\) est un arbre.
+    Or, un arbre ne peut pas être \(3\)-régulier car toute feuille d’un arbre a un degré de 1.
+    Ainsi, \(G\) contient au moins un cycle.
+\end{proof}
 
+On considère maintenant un plus petit cycle \(C\) de \(G\) et on s’intéresse à \(G' = G \setminus C\).
 
+Si \(G'\) contient un cycle, alors \(G\) contient deux cycles disjoints.
 
+Si \(G'\) ne contient pas de cycle, alors \(G'\) est une forêt.
+Etudions le degré de \(G'\).
 
+Il est clair que \(|V(G')| \geq 3\) car \(G\) est \(3\)-régulier et \(C\) contient au moins 3 sommets.
 
+Si \(|V(G')| = 3\), alors \(C\) est de longueur 5 mais en reliant les sommets de \(C\) à ceux de \(G'\) on trouve un cycle de longueur 3 plus court que \(C\), ce qui est une contradiction.
 
+Idem pour \(|V(G')| = 4\) où le cycle \(C\) est de longueur 4 et on trouve un cycle de longueur 3 plus court que \(C\).
 
+Si \(|V(G')| \geq 5\), alors \(C\) est de longueur au moins 3 (pas de contradiction directe).
+On considère un arbre dans \(G'\) et note \(r\) sa racine. Si \(r\) est lié à deux sommets de \(C\), alors on trouve un cycle de longueur
+\begin{equation*}
+    \left\lfloor \frac{|C|}{2} \right\rfloor + 2 = 3
+\end{equation*}
+Alors \(C\) est de longueur exactement 3.
+Or \(G'\) est une foret donc il contient des feuilles qui sont liées à deux sommets de \(C\). Alors il y a au moins 4 arêtes sortant de \(G'\) (une feuille et \(r\)) mais \(C\) ne contient que 3 sommets, ce qui est une contradiction.
 
+Donc toute racine d'un arbre de \(G'\) est liée à au plus un sommet de \(C\).
 
+\begin{proposition}
+    Il y a 7 arêtes sortant de \(G'\).
+\end{proposition}
 
-Soit \(G = (V,E)\) un graphe \(3\)-régulier connexe.
-On va montrer que \(G\) admet une partition satisfaisante, sauf si \(G\) est isomorphe à \(K_4\) ou \(K_{3,3}\).
+\begin{proof}
+    \(G'\) contient au moins 5 sommets (qu'on note \(v_1, v_2, v_3, v_4, v_5\)) arrangés en arbre.
+    La racine \(r\) de cet arbre est liée à au plus un sommet de \(C\) donc elle a deux enfants.
+    Si ces enfants ont deux enfants, ils n'ont pas de lien avec \(C\), s'ils en ont un alors ils ont une arête sortante vers \(C\) et s'ils n'en ont pas alors ils ont deux arêtes sortantes vers \(C\).
+    En continuant ainsi, on trouve que \(G'\) contient au moins 7 arêtes sortant vers \(C\).
+\end{proof}
 
-Soit \((A,B)\) une partition de \(V\) telle que \(A \neq \emptyset\) et \(B \neq \emptyset\).
+Comme il y a au moins 7 arêtes sortant de \(G'\), le cycle \(C\) est de longueur au moins 7.
+Or on peut trouver un cycle à partir de la feuille la plus haute de \(G'\) et de deux sommets de \(C\).
+Ce cycle est de longueur
+\begin{equation*}
+    \left\lfloor \frac{|C|}{2} \right\rfloor + 2 = 5
+\end{equation*}
+On a alors un cycle de longueur 5 plus court que \(C\), ce qui est une contradiction.
 
+Ainsi, \(G'\) contient un cycle et \(G\) contient deux cycles disjoints.
+
+Soient \(C_1\) et \(C_2\) deux cycles disjoints de \(G\).
+On considère le processus suivant pour trouver notre partition satisfaisante.
+
+On considère la partition \((C_1, V \setminus C_1)\) de \(V\). En particulier, on sait que \(C_2\) est dans \(V \setminus C_1\).
 On dit qu’un sommet \(v \in V\) est \emph{mauvais} si \(d_{\mathrm{ext}}(v) > d_{\mathrm{int}}(v)\).
 Comme \(G\) est \(3\)-régulier, cela équivaut à \(d_{\mathrm{ext}}(v) \geq 2\).
 
-On considère le processus suivant: tant qu’il existe un sommet mauvais \(v\), on le déplace dans l’autre partie, à condition que sa partie contienne au moins deux sommets.
+Tant qu'il existe un sommet mauvais \(v\), on le déplace dans l’autre partie. Comme tout sommet appartenant à \(C_1\) et \(C_2\) ne sera jamais déplacé, on ne peut pas vider \(C_1\) ou \(C_2\) et le processus termine.
 
-On définit la fonction \(f\) comme suit:
-\begin{equation*}
-    f(A,B) = |E(A)| + |E(B)|
-\end{equation*}
-où \(E(A)\) (resp. \(E(B)\)) désigne l’ensemble des arêtes internes à \(A\) (resp. \(B\)).
-
-On considère alors les propositions suivantes:
-
-\begin{proposition}
-    A chaque déplacement autorisé, la fonction \(f\) augmente strictement.
-\end{proposition}
-
-\begin{proof}
-    Soit \(v\) un sommet mauvais. Alors \(d_{\mathrm{ext}}(v) \geq 2\) et donc \(d_{\mathrm{int}}(v) \leq 1\).
-    En déplaçant \(v\), on perd \(d_{\mathrm{int}}(v)\) arêtes internes et on gagne \(d_{\mathrm{ext}}(v)\) arêtes internes.
-    Ainsi,
-    \begin{equation*}
-    \Delta f \geq 2 - 1 = 1.
-    \end{equation*}
-    Donc \(f\) augmente strictement.
-\end{proof}
-
-Comme \(f\) est bornée par \(|E|\), le processus termine.
-
-\begin{proposition}\label{prop:2}
-    Si le processus s’arrête et que la partition n’est pas satisfaisante, alors l’une des deux parties est un singleton.
-\end{proposition}
-
-\begin{proof}
-    Si un sommet mauvais appartient à une partie de taille au moins 2, alors il pourrait être déplacé, ce qui contredit l’arrêt du processus.
-    Donc tout sommet mauvais appartient à une partie de taille 1.
-\end{proof}
-
-Supposons maintenant que le processus s’arrête sur une partition non satisfaisante. Par la proposition~\ref{prop:2}, on peut supposer sans perte de généralité que \(A = \{v\}\). % chktex 44
-Alors \(v\) a ses trois voisins dans \(B\), qu'on note \(x\), \(y\) et \(z\).
-On analyse alors la structure de \(B\). 
-
-Si \(B\) contient exactement \(3\) sommets alors \(G\) est isomorphe à \(K_4\).
-
-\(B\) ne peut pas contenir exactement \(4\) sommets car \(G\) est \(3\)-régulier (donc \(\abs{V}\) est paire).
-
-Si \(B\) contient exactement \(5\) sommets on a 2 cas possibles:
-\begin{itemize}
-    \item soit \(x\), \(y\) et \(z\) sont tous les trois liés à un même sommet de \(B\), alors \(G\) est isomorphe à \(K_{3,3}\),
-    \item soit \(x\), \(y\) et \(z\) ne sont pas tous les trois liés à un même sommet de \(B\), alors \(G\) contient deux cycles disjoints de longueur 3 et on a trouvé une autre partition satisfaisante.
-\end{itemize}
-
-
-Si \(B\) contient au moins \(7\) sommets, alors \(B\) contient au moins un sommet \(w\) qui n’est pas lié à \(x\), \(y\) ou \(z\).
-Alors \(w\) est lié à un autre sommet de \(B\) (car \(G\) est \(3\)-régulier).
-On peut alors considérer la partition suivante.
-
-Si il existe un cycle \(C \in B \setminus \{x, y, z\}\) qui contient \(w\), alors on considère la partition \(C, V \setminus C\)
-et on répète le processus décrit précédemment.
-Comme \(C\) contient au moins 3 sommets, il ne sera pas vidé par le processus et on trouvera une partition satisfaisante.
-
-Sinon, il existe un cycle \(C\) dans \(V\) qui contient \(w\), un sommet parmi \(x\), \(y\) ou \(z\) (disons \(x\)) et au moins un autre sommet de \(B\) (disons \(w'\)).
-On considère alors la partition \(C, V \setminus C\) et on répète le processus décrit précédemment.
-
-Ainsi, si \(G\) n’est isomorphe ni à \(K_4\) ni à \(K_{3,3}\), on peut répéter le processus un nombre fini de fois pour trouver une partition satisfaisante de \(G\).
-
-On en déduit que \(G\) admet une partition satisfaisante.
-
+Au moment où le processus termine, il n'existe plus de sommet mauvais, donc pour tout sommet \(v\) de \(V\), on a \(d_{\mathrm{int}}(v) \geq d_{\mathrm{ext}}(v)\).
+Ainsi, la partition obtenue à la fin du processus est une partition satisfaisante de \(G\).
 
 \subsubsection{Le cas \(k = 4\)}
 
@@ -192,7 +165,7 @@ Lorsqu’on déplace un sommet mauvais \(v\), on a
 
 donc \(f\) augmente strictement. Le processus termine donc.
 
-Si le processus s’arrête sur une partition non satisfaisante, alors toute partie contenant un sommet mauvais est un singleton (d'après la proposition~\ref{prop:2}). On peut donc supposer sans perte de généralité que \(A = \{v\}\). % chktex 44
+Si le processus s’arrête sur une partition non satisfaisante, alors toute partie contenant un sommet mauvais est un singleton (d'après la proposition). On peut donc supposer sans perte de généralité que \(A = \{v\}\). % chktex 44
 
 Le sommet \(v\) est alors adjacent à quatre sommets de \(B\).
 Si \(|V| = 5\), alors \(G\) est isomorphe à \(K_5\), qui n’admet pas de partition satisfaisante.
