@@ -218,7 +218,7 @@ def is_satisfying(G, A, B):
     return True
 
 
-def plot_partitioned_graph(G, A, B, pos, ax, title="", node_size=600, font_size=12):
+def plot_comparison(G, A, B, pos, ax, title="", node_size=600, font_size=12):
     color_map = ["skyblue" if v in A else "salmon" for v in G.nodes()]
     
     edge_colors = []
@@ -241,6 +241,35 @@ def plot_partitioned_graph(G, A, B, pos, ax, title="", node_size=600, font_size=
     )
     
     ax.set_title(title)
+
+
+def plot_single(G, A, B, pos=None, title="", node_size=600, font_size=12):
+    if pos is None:
+        pos = nx.spring_layout(G)
+
+    color_map = ["skyblue" if v in A else "salmon" for v in G.nodes()]
+    
+    edge_colors = []
+    for u, v in G.edges():
+        if (u in A and v in A) or (u in B and v in B):
+            edge_colors.append("green")
+        else:
+            edge_colors.append("red")
+    
+    plt.figure(figsize=(8, 6))
+    nx.draw(
+        G,
+        pos,
+        with_labels=True,
+        node_color=color_map,
+        edge_color=edge_colors,
+        node_size=node_size,
+        font_size=font_size,
+        width=2
+    )
+    
+    plt.title(title)
+
 
 
 def save_graph(G, filename="graphs.txt"):
@@ -285,7 +314,10 @@ A2, B2 = satisfying_partition_3_regular(G)
 fig, axes = plt.subplots(1, 2, figsize=(14, 6))
 
 # Draw both on the same layout
-plot_partitioned_graph(G, A1, B1, pos, ax=axes[0], title="Heuristic partition")
-plot_partitioned_graph(G, A2, B2, pos, ax=axes[1], title="Cycle-based partition")
+plot_comparison(G, A1, B1, pos, ax=axes[0], title="Heuristic partition")
+plot_comparison(G, A2, B2, pos, ax=axes[1], title="Cycle-based partition")
+
+# Or draw just one
+# plot_single(G, A1, B1, pos=pos, title="Heuristic partition")
 
 plt.show()
