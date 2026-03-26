@@ -140,36 +140,8 @@ Ainsi, la partition obtenue à la fin du processus est une partition satisfaisan
 
 \subsubsection{Le cas \(k = 4\)}
 
-Soit \(G = (V,E)\) un graphe \(4\)-régulier connexe.
-On va montrer que \(G\) admet une partition satisfaisante sauf si \(G\) est isomorphe à \(K_5\).
+On peut reprendre les mêmes arguments que pour le cas \(k = 3\) pour montrer que tout graphe \(4\)-régulier connexe admet une partition satisfaisante, sauf s’il est isomorphe à \(K_5\).
 
-On considère une partition \((A,B)\) de \(V\), et on dit qu’un sommet est mauvais si
-
-\begin{equation*}
-    d_{\mathrm{ext}}(v) > d_{\mathrm{int}}(v).
-\end{equation*}
-
-Comme \(G\) est \(4\)-régulier, cela équivaut à \(d_{\mathrm{ext}}(v) \geq 3\).
-
-On considère le même processus que dans le cas \(k=3\), en déplaçant les sommets mauvais tant que leur partie contient au moins deux sommets, et la fonction
-
-\begin{equation*}
-    f(A,B) = |E(A)| + |E(B)|.
-\end{equation*}
-
-Lorsqu’on déplace un sommet mauvais \(v\), on a
-
-\begin{equation*}
-    \Delta f \geq d_{\mathrm{ext}}(v) - d_{\mathrm{int}}(v) \geq 3 - 1 = 2,
-\end{equation*}
-
-donc \(f\) augmente strictement. Le processus termine donc.
-
-Si le processus s’arrête sur une partition non satisfaisante, alors toute partie contenant un sommet mauvais est un singleton (d'après la proposition). On peut donc supposer sans perte de généralité que \(A = \{v\}\). % chktex 44
-
-Le sommet \(v\) est alors adjacent à quatre sommets de \(B\).
-Si \(|V| = 5\), alors \(G\) est isomorphe à \(K_5\), qui n’admet pas de partition satisfaisante.
-
-Sinon, on peut reprendre la démonstration pour \(k=3\) et montrer qu’il existe dans \(B\) un cycle \(C\) de longueur au moins 3 tel que la partition \((C, V \setminus C)\) permet de relancer le processus sans vider \(C\), ce qui conduit à une partition satisfaisante.
-
-Ainsi, tout graphe \(4\)-régulier connexe non isomorphe à \(K_5\) admet une partition satisfaisante.
+En effet tout graphe \(4\)-régulier contient un cycle, et en retirant ce cycle on trouve une forêt qui contient au moins un certain nombre de sommets (sauf pour \(n\) suffisamment petit, auquel cas on trouve une contradiction directe).
+En étudiant les arêtes sortant de cette forêt, on trouve une contradiction avec le cycle minimal choisi, ce qui montre que le graphe contient au moins deux cycles disjoints.
+En appliquant le même processus que pour le cas \(k = 3\) à partir de ces deux cycles disjoints, on trouve une partition satisfaisante.
