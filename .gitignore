@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 LaTeX/build/
 LaTeX/logs/
+graphs.txt
