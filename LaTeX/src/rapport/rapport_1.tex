@@ -1,18 +1,59 @@
 \section{Introduction}\label{sec:s_1}
+Dans ce rapport, on étudie le problème de l'existence d'une partition satisfaisante dans un graphe \(G\).
+Une partition satisfaisante d'un graphe est une partition de ses sommets en deux ensembles distincts tels que pour chaque sommet, le nombre de voisins dans son propre ensemble est au moins égal au nombre de voisins dans l'autre ensemble.
+
+Ce problème est intéressant car il est permet de mieux comprendre la structure des graphes et les relations entre leurs sommets. De plus, chercher une partition satisfaisante d'un graphe peut être vu comme une forme de clustering ou de regroupement de sommets en fonction de leurs connexions.
+
+Dans ce rapport, on va présenter quelques résultats importants sur les partitions satisfaisantes.
+On commencera par présenter les motivations et l'état de l'art sur ce sujet, cela permettra de mieux comprendre l'importance de ce problème et les différentes approches qui ont été proposées pour le résoudre.\\
+Ensuite, on présentera quelques preuves de résultats importants sur les partitions satisfaisantes, notamment pour les graphes non connexes et les graphes \(k\)-réguliers pour \(k \leq 4\).\\
+Enfin, on présentera des résultats de recherche sur quelques conjectures ouvertes concernant les partitions satisfaisantes.
 
 \subsection{Motivations}\label{subsec:ss1_1}
+Le problème de l'existence d'une partition satisfaisante dans un graphe est un problème qu'on retrouve dans de nombreux domaines.
+
+La recherche de communautés dans des réseaux sociaux ou biologiques peut être vue comme une recherche de partitions satisfaisantes, où les sommets représentent des individus ou des gènes et les arêtes représentent des interactions ou des relations. Trouver une partition satisfaisante permet de regrouper les sommets en fonction de leurs connexions, ce qui peut aider à mieux comprendre la structure du réseau et à identifier des groupes d'individus ou de gènes qui ont des interactions similaires.
+
+On peut aussi étudier ce problème dans le cadre du Web pour identifier un des ensembles de pages Web qui ont plus de liens internes que de liens externes, ce qui peut être utile pour le référencement ou pour l'analyse de la structure du Web. Ce problème serait alors similaire au problème de \textsc{Satisfactory} \(k\)-\textsc{Partition} pour un \(k\) bien choisi.
+
+Ce problème peut aussi être étudié d'un point de vue bien plus géométrique où on pourrait alors chercher des alliances entre les sommets d'un graphe, par exemple dans le cadre de la théorie des jeux ou de la sociologie. Trouver une partition satisfaisante permettrait alors d'identifier des groupes d'individus capables de se défendre entre eux contre les attaques d'individus extérieurs. C'est un problème qui peut alors être fortement ancré dans la réalité et l'histoire dans le cadre d'alliances entre pays ou entreprises recherchant une stabilité via des alliances.
+
+Un autre domaine d'application très moderne est celui de l'intelligence artificielle où la capacité de regrouper des éléments en clusters ou en communautés est très importante pour de nombreuses tâches d'apprentissage automatique, de traitement du langage naturel ou de vision par ordinateur. 
+
+De nombreux autres domaines d'application existent pour ce problème ou ses variantes, notamment en informatique théorique, en optimisation combinatoire ou en théorie des graphes. C'est un problème qui a donc une grande importance et qui continue de susciter l'intérêt de nombreux chercheurs dans différents domaines.
 
 
-\subsection{Etat de l'art}\label{subsec:ss1_2}
+\section{Etat de l'art}\label{sec:s_2}
+On présente dans cette partie quelques résultats importants sur les partitions satisfaisantes et des définitions formelles des problèmes associés.
+
+\subsection{Notations et définitions}\label{subsec:ss2_1}
+Dans la suite du rapport on considèrera toujours des graphes simples, non orientés et finis.
+
+\begin{definition}
+    Soit \(G = (V, E)\) un graphe et \(x\) un sommet de \(G\).
+    Le \defemph{degré interne} de \(x\) pour une partition \((A, B)\) de \(V\) est le nombre de voisins de \(x\) qui sont dans la même partie que \(x\).
+    Le \defemph{degré externe} de \(x\) pour une partition \((A, B)\) de \(V\) est le nombre de voisins de \(x\) qui sont dans l'autre partie que celle de \(x\).
+\end{definition}
+
+\begin{definition}
+    Soit \(G = (V, E)\) un graphe.
+    Une \defemph{partition satisfaisante} de \(G\) est une partition \((A, B)\) de \(V\) telle que pour tout sommet \(x\) de \(V\), le degré interne de \(x\) pour la partition \((A, B)\) est supérieur ou égal à son degré externe pour la partition \((A, B)\).
+\end{definition}
+
+\begin{definition}
+    Soit \(G = (V, E)\) un graphe et \(k\) un entier positif.
+    Le problème de \textsc{Satisfactory} \(k\)-\textsc{Partition} est le problème de décider si \(G\) admet une partition satisfaisante \((A, B)\) telle que \(|A| = k\).
+\end{definition}
 
 
-\section{Quelques preuves}\label{sec:s_2}
+
+\section{Quelques preuves}\label{sec:s_3}
 
 On démontre dans cette section quelques résultats importants sur les partitions satisfaisantes.
 On étudiera notamment le cas des graphes non connexes et on donnera des résultats sur les graphes \(k\)-réguliers pour \(k \leq 4\).
 Le problème reste ouvert pour les graphes \(k\)-réguliers avec \(k \geq 5\).
 
-\subsection{Le cas des graphes non connexes}\label{subsec:ss2_1}
+\subsection{Le cas des graphes non connexes}\label{subsec:ss3_1}
 
 On montre dans cette partie que tout graphe non connexe admet une partition satisfaisante.
 
@@ -33,15 +74,15 @@ Ainsi, \((A, B)\) est une partition satisfaisante de \(G\).
 
 Dans la suite on ne considérera donc que des graphes connexes, car les graphes non connexes admettent toujours une partition satisfaisante.
 
-\subsection{Les cas \(k \leq 4\)}\label{subsec:ss2_2}
+\subsection{Les cas \(k \leq 4\)}\label{subsec:ss3_2}
 
-\subsubsection{Le cas \(k = 1\)}\label{subsubsec:ss2_2_1}
+\subsubsection{Le cas \(k = 1\)}\label{subsubsec:ss3_2_1}
 
 Soit \(G\) un graphe \(1\)-régulier connexe.
 \(G\) est forcément le graphe à deux sommets reliés par une arête.
 Il n'admet pas de partition satisfaisante, car les deux sommets ont un degré interne de 0 et un degré externe de 1.
 
-\subsubsection{Le cas \(k = 2\)}\label{subsubsec:ss2_2_2}
+\subsubsection{Le cas \(k = 2\)}\label{subsubsec:ss3_2_2}
 
 Soit \(G\) un graphe \(2\)-régulier connexe.
 \(G\) est un cycle de longueur \(n \geq 3\).
@@ -58,7 +99,7 @@ Si \(z\) est dans la partie \(V \setminus \{x, y\}\), alors son degré interne e
 Ainsi, pour tout sommet \(z\) de \(G\), on a \(d_{\mathrm{int}}(z) \geq d_{\mathrm{ext}}(z)\) pour la partition \(({x, y}, V \setminus \{x, y\})\).
 Donc \(G\) admet une partition satisfaisante.
 
-\subsubsection{Le cas \(k = 3\)}
+\subsubsection{Le cas \(k = 3\)}\label{subsubsec:ss3_2_3}
 
 On montre dans cette partie que tout graphe \(3\)-régulier connexe admet une partition satisfaisante, sauf s’il est isomorphe à \(K_4\) ou \(K_{3,3}\). On travaille sur le degré de \(G\).
 
@@ -138,7 +179,7 @@ Tant qu'il existe un sommet mauvais \(v\), on le déplace dans l’autre partie.
 Au moment où le processus termine, il n'existe plus de sommet mauvais, donc pour tout sommet \(v\) de \(V\), on a \(d_{\mathrm{int}}(v) \geq d_{\mathrm{ext}}(v)\).
 Ainsi, la partition obtenue à la fin du processus est une partition satisfaisante de \(G\).
 
-\subsubsection{Le cas \(k = 4\)}
+\subsubsection{Le cas \(k = 4\)}\label{subsubsec:ss3_2_4}
 
 On peut reprendre les mêmes arguments que pour le cas \(k = 3\) pour montrer que tout graphe \(4\)-régulier connexe admet une partition satisfaisante, sauf s’il est isomorphe à \(K_5\).
 
