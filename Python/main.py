@@ -1,3 +1,5 @@
+import math
+
 import networkx as nx
 import random
 import matplotlib.pyplot as plt
@@ -205,6 +207,8 @@ def shortest_cycle(G):
 # ^ O(n * (n + m)) au pire, O(n^2) pour les 3-reguliers, c'est long...
 
 def is_satisfying(G, A, B):
+    if not A or not B:
+        return False
     for v in G.nodes():
         if v in A:
             d_int = sum(1 for u in G.neighbors(v) if u in A)
@@ -271,7 +275,6 @@ def plot_single(G, A, B, pos=None, title="", node_size=600, font_size=12):
     plt.title(title)
 
 
-
 def save_graph(G, filename="graphs.txt"):
     with open(filename, "a") as f:
         edges = list(G.edges())
@@ -288,6 +291,38 @@ def load_graph(line_number, filename="graphs.txt"):
     return G
 
 
+def exhaustive_search_partition(G):
+    # fix a node in A then try all partitions of the rest to ensure we don't miss the solution
+    nodes = list(G.nodes())
+    n = len(nodes)
+    A = {nodes[0]}
+    B = set(nodes[1:])
+    for i in range(1, 2**(n-1)):
+        A = {nodes[0]} | {nodes[j] for j in range(1, n) if (i & (1 << (j-1))) > 0}
+        B = set(nodes) - A
+        if is_satisfying(G, A, B):
+            return A, B
+    return None, None
+
+
+def all_satisfying_partitions(G):
+    nodes = list(G.nodes())
+    n = len(nodes)
+    if n % 2 != 0:
+        raise ValueError("Graph must have an even number of nodes to be k-regular")
+    A = {nodes[0]}
+    B = set(nodes[1:])
+    satisfying_partitions = []
+    for i in range(1, 2**(n-1)):
+        A = {nodes[0]} | {nodes[j] for j in range(1, n) if (i & (1 << (j-1))) > 0}
+        B = set(nodes) - A
+        if is_satisfying(G, A, B):
+            satisfying_partitions.append((A, B))
+    return satisfying_partitions
+
+
+
+
 # Preuve que ca marche pas pour K4 et K3,3
 # G = nx.complete_graph(4)
 # A, B = satisfying_partition(G)
@@ -300,24 +335,49 @@ def load_graph(line_number, filename="graphs.txt"):
 
 # On retrouve la partition satisfaisante pour un graphe 3-regulier aleatoire
 G = nx.random_regular_graph(3, 10)
-# G = load_graph(0)  # load the first graph from file 
+# G = load_graph(21)  # load the first graph from file 
+# 21 VERY interesting
 save_graph(G)
 
 # Fix layout
-pos = nx.spring_layout(G, seed=42)
+seed = 42
+pos = nx.spring_layout(G, seed=seed)
 
 # Compute partitions
 A1, B1 = satisfying_partition(G)
 A2, B2 = satisfying_partition_3_regular(G)
+A3, B3 = exhaustive_search_partition(G)
+P = all_satisfying_partitions(G)
+print(P)
+print(f"Found {len(P)} satisfying partitions (including duplicates)")
 
-# Create ONE figure with 2 axes
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+# Plotting
+n_plots = 3
+n_cols = 2
+n_rows = math.ceil(n_plots / n_cols)
+
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(6*n_cols, 5*n_rows))
+axes = axes.flatten()
 
 # Draw both on the same layout
 plot_comparison(G, A1, B1, pos, ax=axes[0], title="Heuristic partition")
 plot_comparison(G, A2, B2, pos, ax=axes[1], title="Cycle-based partition")
+plot_comparison(G, A3, B3, pos, ax=axes[2], title="Exhaustive search partition")
+fig.delaxes(axes[3])
 
 # Or draw just one
 # plot_single(G, A1, B1, pos=pos, title="Heuristic partition")
 
+plt.show()
+
+print("Now showing all partitions:")
+n_plots = len(P)
+n_cols = 3
+n_rows = math.ceil(n_plots / n_cols)
+fig, axes = plt.subplots(n_rows, n_cols, figsize=(6*n_cols, 5*n_rows))
+axes = axes.flatten()
+for i, (A, B) in enumerate(P):
+    plot_comparison(G, A, B, pos, ax=axes[i], title=f"Partition {i+1}")
+for j in range(i+1, len(axes)):
+    fig.delaxes(axes[j])
 plt.show()
