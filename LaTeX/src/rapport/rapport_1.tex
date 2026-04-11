@@ -23,27 +23,127 @@ Un autre domaine d'application très moderne est celui de l'intelligence artific
 De nombreux autres domaines d'application existent pour ce problème ou ses variantes, notamment en informatique théorique, en optimisation combinatoire ou en théorie des graphes. C'est un problème qui a donc une grande importance et qui continue de susciter l'intérêt de nombreux chercheurs dans différents domaines.
 
 
+\subsection{Définition du problème}\label{subsec:ss1_2}
+
+Dans la suite du rapport, on s'intéressera au problème de \textsc{Satisfactory Graph Partition}.
+
+\begin{definition}\,\\
+    Soit \(G = (V, E)\) un graphe.
+
+    Une \defemph{partition satisfaisante} de \(G\) est une partition \((A, B)\) de \(V\) telle que pour tout sommet \(x\) de \(V\), le degré interne de \(x\) pour la partition \((A, B)\) est supérieur ou égal à son degré externe pour la partition \((A, B)\).
+\end{definition}
+
+Quand on cherche à déterminer si un graphe admet ou non une partition satisfaisante, on cherchera donc à trouver une partition \((A, B)\) de \(V\) telle que pour tout sommet \(x\) de \(V\), on ait \(d_{\mathrm{int}}(x) \geq d_{\mathrm{ext}}(x)\).
+
+\begin{definition}\,\\
+    Soit \(G = (V, E)\) un graphe et \((A, B)\) une partition de \(V\).
+    Soit \(x\) un sommet de \(G\).
+
+    Le \defemph{degré interne} de \(x\) pour la partition \((A, B)\) est le nombre de voisins de \(x\) qui sont dans la même partie que \(x\), noté \(d_{\mathrm{int}}(x)\).
+
+    Le \defemph{degré externe} de \(x\) pour la partition \((A, B)\) est le nombre de voisins de \(x\) qui sont dans l'autre partie que celle de \(x\), noté \(d_{\mathrm{ext}}(x)\).
+\end{definition}
+
+On pourra aussi utiliser la notation \(d_A(x)\) pour le nombre de voisins de \(x\) dans la partie \(A\) et \(d_B(x)\) pour le nombre de voisins de \(x\) dans la partie \(B\).
+
+\begin{remark}\,\\
+    La notation \(d_{\mathrm{int}}(x)\) (resp.\ \(d_{\mathrm{ext}}(x)\)) dépend du choix de la partition \((A, B)\) de \(V\).
+    On pourra donc le préciser en écrivant \(d_{\mathrm{int}}^{(A, B)}(x)\) (resp.\ \(d_{\mathrm{ext}}^{(A, B)}(x)\)) si besoin.
+
+    Pour alléger la notation, on écrira simplement \(d_{\mathrm{int}}(x)\) (resp.\ \(d_{\mathrm{ext}}(x)\)) lorsque le choix de la partition \((A, B)\) est clair dans le contexte.
+\end{remark}
+
+
+\subsection{Vue d'ensemble sur les résultats et l'organisation du rapport}\label{subsec:ss1_3}
+
+Dans la section suivante on présentera quelques résultats trouvés pendant la recherche sur ce problème.
+
+% TODO: ajouter les resultats de recherche decouverts ici
+
+Pour ce qui est de l'organisation du rapport, on présentera dans la section~\ref{sec:s_2} l'état de l'art sur les partitions satisfaisantes, notamment les résultats importants qui ont été trouvés sur ce sujet et les différentes approches qui ont été proposées pour résoudre ce problème. % chktex 44
+
+Dans la section~\ref{sec:s_3}, on présentera quelques preuves de ces résultats. % chktex 44
+
+Dans la section~\ref{sec:s_4}, on expliquera plus en détail le saut de complexité de ce problème pour les graphes \(k\)-réguliers à partir de \(k = 5\) et on présentera des résultats de recherche et comment on a abordé ce problème. % chktex 44
+
+Enfin, dans la section~\ref{sec:s_5}, on présentera nos résultats de recherche sur 2 grandes conjectures ouvertes concernant les partitions satisfaisantes avant de conclure sur ce travail et de présenter des perspectives pour la suite. % chktex 44
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Etat de l'art}\label{sec:s_2}
 On présente dans cette partie quelques résultats importants sur les partitions satisfaisantes et des définitions formelles des problèmes associés.
 
 \subsection{Notations et définitions}\label{subsec:ss2_1}
 Dans la suite du rapport on considèrera toujours des graphes simples, non orientés et finis.
+% TODO: reorganise this part relative to part 1.3
 
-\begin{definition}
-    Soit \(G = (V, E)\) un graphe et \(x\) un sommet de \(G\).
-    Le \defemph{degré interne} de \(x\) pour une partition \((A, B)\) de \(V\) est le nombre de voisins de \(x\) qui sont dans la même partie que \(x\).
-    Le \defemph{degré externe} de \(x\) pour une partition \((A, B)\) de \(V\) est le nombre de voisins de \(x\) qui sont dans l'autre partie que celle de \(x\).
-\end{definition}
+\subsection{Le cas des graphes non connexes}\label{subsec:ss2_2}
 
-\begin{definition}
-    Soit \(G = (V, E)\) un graphe.
-    Une \defemph{partition satisfaisante} de \(G\) est une partition \((A, B)\) de \(V\) telle que pour tout sommet \(x\) de \(V\), le degré interne de \(x\) pour la partition \((A, B)\) est supérieur ou égal à son degré externe pour la partition \((A, B)\).
-\end{definition}
+\begin{proposition}\label{prop:non_connexe}
+    Soit \(G\) un graphe non connexe.
+    Alors \(G\) admet une partition satisfaisante.
+\end{proposition}
 
-\begin{definition}
-    Soit \(G = (V, E)\) un graphe et \(k\) un entier positif.
-    Le problème de \textsc{Satisfactory} \(k\)-\textsc{Partition} est le problème de décider si \(G\) admet une partition satisfaisante \((A, B)\) telle que \(|A| = k\).
-\end{definition}
+\begin{proof}
+    Soit \(A\) une composante connexe de \(G\) et \(B = V \setminus A\) le reste des sommets.
+
+    On considère la partition \((A, B)\) de \(V\).
+    Soit \(x\) un sommet de \(A\). 
+    Le degré interne de \(x\) dans \(A\) est au moins 1 car \(A\) est une composante connexe.
+    Son degré externe (donc dans \(B\)) est de 0 car il n'y a pas d'arêtes entre \(A\) et \(B\).
+    Ainsi, pour tout sommet \(x\) de \(A\), on a \(d_{\mathrm{int}}(x) \geq d_{\mathrm{ext}}(x)\).
+
+    Soit \(y\) un sommet de \(B\). Le degré externe de \(y\) dans \(A\) est de 0 car il n'y a pas d'arêtes entre \(A\) et \(B\).
+    Comme le degré ne peut pas être négatif, on a \(d_{\mathrm{ext}}(y) \geq 0\).
+    Ainsi, pour tout sommet \(y\) de \(B\), on a \(d_{\mathrm{ext}}(y) \geq d_{\mathrm{int}}(y)\).
+
+    On a donc montré que pour tout sommet \(x\) de \(V\), le degré interne de \(x\) est supérieur ou égal à son degré externe pour la partition \((A, B)\).
+    Ainsi, \((A, B)\) est une partition satisfaisante de \(G\).
+\end{proof}
+
+\subsection{Le cas des graphes \(k\)-réguliers pour \(k \leq 4\)}\label{subsec:ss2_3}
+
+\begin{proposition}
+    Tout graphe \(k\)-régulier pour \(k \leq 4\) admet une partition satisfaisante, sauf s’il est isomorphe à \(K_2\), \(K_3\), \(K_4\) ou \(K_{3,3}\).
+\end{proposition}
+
+\begin{proof}
+    Soit \(G\) un graphe \(k\)-régulier pour \(k \leq 4\).
+    D'après la proposition~\ref{prop:non_connexe}, on peut supposer que \(G\) est connexe. % chktex 44
+    Procédons par cas sur \(k\).
+    
+    Si \(k = 1\), alors \(G\) est forcément le graphe à deux sommets reliés par une arête, c'est-à-dire \(K_2\), et n'admet pas de partition satisfaisante.
+
+    Si \(k = 2\), alors \(G\) est un cycle de longueur \(n \geq 3\).
+    Si \(n = 3\), alors \(G\) est un triangle et n'admet pas de partition satisfaisante.
+    Si \(n \geq 4\), alors on peut partitionner les sommets de \(G\) en deux parties: \(({x, y}, V \setminus \{x, y\})\) où \(x\) et \(y\) sont deux sommets adjacents de \(G\).
+    On vérifie que pour tout sommet \(z\) de \(G\), on a \(d_{\mathrm{int}}(z) \geq d_{\mathrm{ext}}(z)\) pour cette partition, donc \(G\) admet une partition satisfaisante.
+
+    Si \(k = 3\), alors \(G\) est un graphe \(3\)-régulier connexe.
+    Si \(n = 4\), alors \(G\) est isomorphe à \(K_4\) et n’admet pas de partition satisfaisante.
+    Si \(n = 6\), alors on a deux cas:
+    % TO COMPLETE
+\end{proof}
+
+% TODO: reorganise the proof parts of this section relative to part 3
+
+\subsection{Problèmes adjacents et vocabulaire}\label{subsec:ss2_4}
+
+Dans cette partie on présente quelques problèmes adjacents au problème de \textsc{Satisfactory Graph Partition} et des définitions formelles de ces problèmes.
+
+% TODO: insert here problems for friendly partitions, graph alliances, cohesive sets, etc.
 
 
 
@@ -186,3 +286,54 @@ On peut reprendre les mêmes arguments que pour le cas \(k = 3\) pour montrer qu
 En effet tout graphe \(4\)-régulier contient un cycle, et en retirant ce cycle on trouve une forêt qui contient au moins un certain nombre de sommets (sauf pour \(n\) suffisamment petit, auquel cas on trouve une contradiction directe).
 En étudiant les arêtes sortant de cette forêt, on trouve une contradiction avec le cycle minimal choisi, ce qui montre que le graphe contient au moins deux cycles disjoints.
 En appliquant le même processus que pour le cas \(k = 3\) à partir de ces deux cycles disjoints, on trouve une partition satisfaisante.
+
+
+% TODO: redo proof with alternative proof i've found
+% TODO: add proof for k = 6
+
+\section{Le cas des graphes \(5\)-réguliers}\label{sec:s_4}
+
+On étudie dans cette section le cas particulier des graphes \(5\)-réguliers.
+Il est connu que le problème de \textsc{Satisfactory Graph Partition} est NP-complet pour les graphes \(5\)-réguliers, alors que pour les graphes \(k\)-réguliers avec \(k \leq 4\) le problème est polynomial.
+
+\subsection{Pourquoi un tel saut de complexité?}\label{subsec:ss4_1}
+
+% \subsection{Cohesive sets and "Barnkopf-Nagy-Paulovics bounds"}\label{subsec:ss4_2}
+
+\subsection{Les classes de graphes}\label{subsec:ss4_3}
+
+\subsubsection{Le cas des graphes bipartis}\label{subsubsec:ss4_3_1}
+
+\subsubsection{Le cas des graphes avec un cycle Hamiltonien}\label{subsubsec:ss4_3_2}
+
+\subsubsection{Le cas des graphes planaires}\label{subsubsec:ss4_3_3}
+
+\subsection{Résultats de recherche sur les conjectures ouvertes}\label{sec:s_5}
+
+% TODO: add results of research on conjectures here
+% TODO: discuss the node counting arguments, edge counting arguments, what happens when the graph is dense or of large girth
+% TODO: discuss Modular composition of non partionable graphs?
+
+\section{Conjectures et perspectives}\label{sec:s_6}
+
+En conclusion de ce rapport on résume les résultats de nos recherches sur les deux conjectures suivantes et on présente des perspectives pour la suite.
+
+\subsection{Conjecture 1}\label{subsec:ss6_1}
+
+\begin{conjecture}
+    Soit \(G\) un graphe et \(k\) un entier.
+
+    Tout graphe \(k\)-régulier, sauf un nombre fini d'entre eux, admet une partition satisfaisante.
+\end{conjecture}
+
+% TODO: discuss and present results of research on this conjecture here
+
+\subsection{Conjecture 2}\label{subsec:ss6_2}
+
+\begin{conjecture}
+    Soit \(G\) un graphe qui admet une partition satisfaisante.
+
+    Alors \(G\) admet une partition satisfaisante où les deux parties sont proportionnellement équilibrées, c'est-à-dire que la taille de chaque partie est au moins un certain pourcentage de la taille totale du graphe.
+\end{conjecture}
+
+% TODO: discuss and present results of research on this conjecture here
