@@ -1,0 +1,509 @@
+% ============================================================
+%  SATISFACTORY GRAPH PARTITION — THESIS SKELETON
+%  Original content preserved in the Scratchpad at the end.
+%  Migrate pieces upward as you write; delete from scratchpad
+%  once placed.
+% ============================================================
+
+
+% --- theorem environments ---
+% \newtheorem{theorem}{Théorème}[section]
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{lemma}[theorem]{Lemme}
+% \newtheorem{corollary}[theorem]{Corollaire}
+% \newtheorem{conjecture}[theorem]{Conjecture}
+% \theoremstyle{definition}
+% \newtheorem{definition}[theorem]{Définition}
+% \newtheorem{example}[theorem]{Exemple}
+% \theoremstyle{remark}
+% \newtheorem{remark}[theorem]{Remarque}
+
+% --- notation shorthands (one convention, used everywhere) ---
+\newcommand{\dint}{d_{\mathrm{int}}}
+\newcommand{\dext}{d_{\mathrm{ext}}}
+
+% ============================================================
+\begin{document}
+% ============================================================
+
+\title{Partitions satisfaisantes dans les graphes}
+\author{}
+\date{}
+\maketitle
+\tableofcontents
+\newpage
+
+% ------------------------------------------------------------
+\section{Introduction}\label{sec:intro}
+% ------------------------------------------------------------
+%
+% CHECKLIST:
+%   [ ] High-level motivation (community detection, web analysis,
+%       game theory / alliances, AI clustering)
+%   [ ] Informal statement of the problem
+%   [ ] Brief summary of results proved in this report
+%   [ ] Organisation of the document (roadmap paragraph)
+%
+% SOURCE: scratchpad §S1
+
+% TODO
+
+
+% ------------------------------------------------------------
+\section{Définitions et notations}\label{sec:defs}
+% ------------------------------------------------------------
+
+On se fixe dans la suite de rapport les conventions suivantes:
+\begin{itemize}
+    \item Tous les graphes considérés sont simples (ni boucles ni arêtes multiples), non orientés, et finis.
+    \item Une partition d'un graphe \(G\) est un couple \((A, B)\) de sous-ensembles disjoints de \(V(G)\) tels que \(A \cup B = V(G)\), \(A \cap B = \emptyset\), et \(A, B \neq \emptyset\).
+\end{itemize}
+
+On introduit les définitions suivantes:
+\begin{definition}[Partition satisfaisante]\,\\
+    Soit \(G = (V, E)\) un graphe.
+    Une \defemph{partition satisfaisante} de \(G\) est une partition \((A, B)\) de \(V\) telle que pour tout sommet \(x \in V\), on a \(\dint(x) \geq \dext(x)\).
+\end{definition}
+
+\begin{definition}[Degrés interne et externe]\,\\
+    Soit \(G = (V, E)\), \((A, B)\) une partition de \(V\), et \(x \in V\).
+
+    Le \defemph{degré interne} \(\dint(x)\) est le nombre de voisins de \(x\) dans sa propre partie.
+
+    Le \defemph{degré externe} \(\dext(x)\) est le nombre de voisins de \(x\) dans l'autre partie.
+\end{definition}
+
+\begin{remark}
+    On peut aussi noter \(d_A(x)\) et \(d_B(x)\) le nombre de voisins de \(x\) dans \(A\) et \(B\) respectivement.
+    Si la partition n'est pas claire du contexte, on précisera \(\dint^{(A,B)}(x)\) et \(\dext^{(A,B)}(x)\).
+\end{remark}
+
+
+
+
+
+
+%
+% CHECKLIST:
+%   [ ] Graph conventions: simple, undirected, finite
+%   [ ] Definition: satisfactory partition
+%   [ ] Definition: internal / external degree
+%       (use dint/dext throughout; note d_A(x) shorthand)
+%   [ ] Remark on notation with explicit partition superscript
+%   [ ] Formal problem statement: SATISFACTORY GRAPH PARTITION
+%   [ ] Any other standard definitions needed (k-regular,
+%       complete graph, bipartite graph, cycle, etc.)
+%
+% SOURCE: scratchpad §S1.2
+
+% TODO
+
+
+% ------------------------------------------------------------
+\section{État de l'art}\label{sec:art}
+% ------------------------------------------------------------
+%
+% CHECKLIST:
+%   [ ] Known results (with bibliographic references)
+%   [ ] Related problems: friendly partitions, graph alliances,
+%       cohesive sets, Satisfactory k-Partition
+%   [ ] Complexity landscape:
+%         polynomial for k <= 4,
+%         NP-complete for k >= 5 (cite the reduction)
+%   [ ] Table or list of known exceptions:
+%         k=1: K2
+%         k=2: K3
+%         k=3: K4, K_{3,3}
+%         k=4: K5
+%
+% SOURCE: scratchpad §S2
+
+% TODO
+
+
+% ------------------------------------------------------------
+\section{Résultats: partitions satisfaisantes pour k <= 4}\label{sec:results}
+% ------------------------------------------------------------
+
+% ----------
+\subsection{Réduction aux graphes connexes}\label{subsec:connected}
+
+\begin{proposition}
+    Tout graphe non connexe admet une partition satisfaisante.
+\end{proposition}
+
+\begin{proof}
+    Soit \(G\) un graphe non connexe, \(A\) une composante connexe de \(G\), et \(B = V(G) \setminus A\) non vide.
+
+    Pour tout sommet \(x \in A\), on a \(\dint(x) \geq 1\) (car \(A\) est connexe) et \(\dext(x) = 0\) (pas d'arêtes entre \(A\) et \(B\)), donc \(\dint(x) \geq \dext(x)\).
+
+    Pour tout sommet \(y \in B\), on a \(\dext(y) = 0\) (pas d'arêtes entre \(B\) et \(A\)), donc \(\dint(y) \geq 0 = \dext(y)\).
+
+    Ainsi, la partition \((A, B)\) est satisfaisante.
+\end{proof}
+
+\begin{corollaire}
+    Pour étudier l'existence de partitions satisfaisantes, on peut se restreindre aux graphes connexes.
+\end{corollaire}
+
+
+
+% ----------
+\subsection{Le cas \(k = 1\)}\label{subsec:k1}
+% ----------
+
+Le seul graphe 1-régulier connexe est \(K_2\), qui n'admet aucune partition satisfaisante.
+
+
+% ----------
+\subsection{Le cas \(k = 2\)}\label{subsec:k2}
+% ----------
+
+Soit \(G = C_n\), un cycle de longueur \(n \geq 3\).
+
+\begin{itemize}
+    \item Si \(n = 3\), alors \(G\) est un triangle, et il n'admet pas de partition satisfaisante (le sommet seul a \(\dint = 0\) et \(\dext = 2\)).
+
+    \item Si \(n \geq 4\), alors la partition \((\{x,y\}, V(G) \setminus \{x,y\})\) pour \(x,y\) adjacents est satisfaisante:
+    \begin{itemize}
+        \item Pour \(z \in \{x,y\}\), on a \(\dint(z) = 1\) (lié à l'autre sommet de la partie) et \(\dext(z) = 1\).
+        \item Pour \(z \in V(G) \setminus \{x,y\}\), on a \(\dint(z) \geq 1\) (ne peut être lié à \(x\) et \(y\) simultanément car \(n \geq 4\)) et \(\dext(z) \leq 1\).
+    \end{itemize}
+    Donc, pour tout sommet \(z\), on a \(\dint(z) \geq \dext(z)\), et la partition est satisfaisante.
+\end{itemize}
+
+
+% ----------
+\subsection{Le cas \(k = 3\)}\label{subsec:k3}
+% ----------
+
+Soit \(G\) un graphe 3-régulier connexe.
+
+
+
+
+
+%
+% DECISION (resolve before migrating):
+%   Two proof strategies exist in the scratchpad:
+%   (A) Two disjoint cycles + local search  [scratchpad §S3.2.3]
+%       — has gaps: "7 edges" proposition sketch, potential
+%         function missing, floor equation contradiction.
+%   (B) Minimal cycle + cut-edge case analysis  [scratchpad §Salt]
+%       — cleaner and more complete.
+%   Recommendation: use (B) as the main proof; promote the
+%   two-disjoint-cycles result to a lemma if useful for k=4.
+%
+% Exceptions: K4 (n=4), K_{3,3} (n=6, bipartite).
+%
+% SOURCE: scratchpad §S3.2.3 and §Salt
+
+% TODO
+
+
+% ----------
+\subsection{Le cas \(k = 4\)}\label{subsec:k4}
+% ----------
+%
+% CHECKLIST:
+%   [ ] Complete proof (currently hand-wavy in scratchpad)
+%   [ ] Exception: K5
+%   [ ] Strategy: adapt k=3 argument, or cite published result
+%
+% SOURCE: scratchpad §S3.2.4
+
+% TODO
+
+
+% ----------
+\subsection{Récapitulatif et exceptions}\label{subsec:exceptions}
+% ----------
+
+Pour récapituler, on a montré les choses suivantes:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c} % chktex 44
+        \(k\) & Existence de partition satisfaisante & Exceptions \\
+        \hline % chktex 44
+        1   & Oui                               & \(K_2\) \\
+        2   & Oui                               & \(K_3\) \\
+        3   & Oui                               & \(K_4\), \(K_{3,3}\) \\
+        4   & Oui                               & \(K_5\)
+    \end{tabular}
+    \caption{Résumé des résultats pour les graphes \(k\)-réguliers avec \(k \leq 4\).}
+\end{table}
+
+
+% ------------------------------------------------------------
+\section{Le saut de complexité: graphes \(k\)-réguliers pour \(k \geq 5\)}\label{sec:k5}
+% ------------------------------------------------------------
+%
+% CHECKLIST:
+%   [ ] Why does complexity jump at k=5?
+%       (parity argument, density, NP-completeness reference)
+%   [ ] Special tractable sub-classes:
+%       5.1  Bipartite 5-regular graphs
+%       5.2  Graphs with a Hamiltonian cycle
+%       5.3  Planar 5-regular graphs
+%   [ ] Your research results / partial progress
+%
+% SOURCE: scratchpad §S4 (currently empty skeleton)
+
+% TODO
+
+
+% ------------------------------------------------------------
+\section{Conjectures ouvertes et résultats de recherche}\label{sec:conjectures}
+% ------------------------------------------------------------
+
+\subsection{Conjecture 1: exceptions en nombre fini}\label{subsec:conj1}
+
+\begin{conjecture}
+    Pour tout entier \(k\), tout graphe \(k\)-régulier, à un nombre fini d'exceptions
+    près, admet une partition satisfaisante.
+\end{conjecture}
+
+%
+% CHECKLIST:
+%   [ ] What the results in §4 already verify (k <= 4)
+%   [ ] Evidence or counterexamples for k >= 5
+%   [ ] Your research results
+%
+% SOURCE: scratchpad §S5
+
+% TODO
+
+
+\subsection{Conjecture 2: partitions équilibrées}\label{subsec:conj2}
+
+\begin{conjecture}
+    Si \(G\) admet une partition satisfaisante, alors il en admet une \((A, B)\)
+    vérifiant \(\min(|A|, |B|) \geq \alpha \cdot |V(G)|\) pour une constante
+    universelle \(\alpha > 0\).
+\end{conjecture}
+
+%
+% CHECKLIST:
+%   [ ] Precise conjectured value of alpha
+%   [ ] Connection to isoperimetric / expander results
+%   [ ] Your research results
+%
+% SOURCE: scratchpad §S6
+
+% TODO
+
+
+% ------------------------------------------------------------
+\section{Conclusion et perspectives}\label{sec:conclusion}
+% ------------------------------------------------------------
+
+% TODO
+
+
+% ============================================================
+%  SCRATCHPAD
+%  All original draft content is preserved below.
+%  Work from top to bottom of the main document, migrating
+%  each block up and deleting it here once integrated.
+% ============================================================
+
+
+
+% ------------------------------------------------------------------
+\paragraph{[S1] Introduction et motivations (original §1 / §1.1)}
+% ------------------------------------------------------------------
+
+Dans ce rapport, on étudie le problème de l'existence d'une partition satisfaisante dans un graphe $G$.
+Une partition satisfaisante est une partition des sommets en deux ensembles distincts tels que pour chaque sommet, le nombre de voisins dans son propre ensemble est au moins égal au nombre de voisins dans l'autre ensemble.
+
+\medskip Domaines d'application~:
+\begin{itemize}
+    \item \textbf{Réseaux sociaux / biologiques~:} recherche de communautés.
+    \item \textbf{Web~:} identification de pages avec plus de liens internes qu'externes
+          (lié à \textsc{Satisfactory} $k$-\textsc{Partition}).
+    \item \textbf{Théorie des jeux / sociologie~:} alliances défensives entre sommets.
+    \item \textbf{Intelligence artificielle~:} clustering pour l'apprentissage automatique.
+\end{itemize}
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[S1.2] Définitions (original §1.2)}
+% ------------------------------------------------------------------
+
+\begin{definition}[Partition satisfaisante]\,\\
+    Soit $G = (V, E)$ un graphe.
+    Une \defemph{partition satisfaisante} de $G$ est une partition $(A, B)$ de $V$ telle que
+    pour tout sommet $x \in V$,\ $\dint(x) \geq \dext(x)$.
+\end{definition}
+
+\begin{definition}[Degrés interne et externe]\,\\
+    Soit $G = (V, E)$, $(A, B)$ une partition de $V$, $x \in V$.
+
+    Le \defemph{degré interne} $\dint(x)$ est le nombre de voisins de $x$ dans sa propre partie.
+
+    Le \defemph{degré externe} $\dext(x)$ est le nombre de voisins de $x$ dans l'autre partie.
+\end{definition}
+
+\begin{remark}
+    On peut noter $d_A(x)$ et $d_B(x)$ le nombre de voisins dans $A$ et $B$ respectivement.
+    On précisera $\dint^{(A,B)}(x)$ si la partition n'est pas claire du contexte.
+\end{remark}
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[S2.2] Graphes non connexes (original §2.2)}
+% ------------------------------------------------------------------
+\textbf{[DUPLICATE — identique à S3.1, garder une seule version]}
+
+\begin{proposition}
+    Tout graphe non connexe admet une partition satisfaisante.
+\end{proposition}
+
+\begin{proof}
+    Soit $A$ une composante connexe de $G$ et $B = V \setminus A$.
+
+    Pour $x \in A$~: $\dint(x) \geq 1$ (connexité de $A$) et $\dext(x) = 0$ (pas
+    d'arêtes entre $A$ et $B$), donc $\dint(x) \geq \dext(x)$.
+
+    Pour $y \in B$~: $\dext(y) = 0$, donc $\dint(y) \geq 0 = \dext(y)$.
+
+    Ainsi $(A, B)$ est une partition satisfaisante.
+\end{proof}
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[S2.3] Proposition générale pour k <= 4 (original §2.3)}
+% ------------------------------------------------------------------
+\textbf{[GAP — preuve incomplète pour k=3, cas n=6 coupé]}
+
+\begin{proposition}
+    Tout graphe $k$-régulier pour $k \leq 4$ admet une partition satisfaisante,
+    sauf s'il est isomorphe à $K_2$, $K_3$, $K_4$ ou $K_{3,3}$.
+\end{proposition}
+
+% NOTE: K5 is missing from the exception list for k=4 — to fix.
+% NOTE: proof body was incomplete in the original.
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[S3.1] Graphes non connexes — deuxième version (original §3.1)}
+% ------------------------------------------------------------------
+\textbf{[DUPLICATE — même preuve que S2.2, supprimer l'une des deux]}
+
+Soit $G$ non connexe, $A$ une composante connexe, $B = V \setminus A$.
+Pour $x \in A$~: $d_A(x) \geq 1$ et $d_B(x) = 0$.
+Pour $y \in B$~: $d_A(y) = 0 \leq d_B(y)$.
+Donc $(A, B)$ est satisfaisante.
+Dans la suite on ne considère que des graphes connexes.
+
+\bigskip\hrule\bigskip
+
+
+% ------------------------------------------------------------------
+\paragraph{[S3.2.3] Cas k=3 — preuve principale (original §3.2.3)}
+% ------------------------------------------------------------------
+\textbf{[GAP — voir notes ci-dessous avant de migrer]}
+
+On montre que tout graphe 3-régulier connexe avec $n \geq 8$ contient deux cycles disjoints.
+
+\begin{proposition}
+    Tout graphe $k$-régulier pour $k \geq 2$ contient un cycle.
+\end{proposition}
+\begin{proof}
+    Un graphe sans cycle est un arbre, donc possède des feuilles de degré 1~: impossible pour $k \geq 2$.
+\end{proof}
+
+Soit $C$ un plus petit cycle de $G$, $G' = G \setminus C$.
+Si $G'$ contient un cycle, $G$ a deux cycles disjoints.
+Si $G'$ est une forêt, on étudie les arêtes entre $G'$ et $C$.
+
+\begin{proposition}
+    Il y a au moins 7 arêtes sortant de $G'$ vers $C$.
+\end{proposition}
+% [GAP] Preuve par cas sur la structure de l'arbre de G' : esquissée mais incomplète.
+
+On déduit $|C| \geq 7$, mais on peut trouver un cycle de longueur
+$\lfloor |C|/2 \rfloor + 2 = 5$ (contradiction).
+% [GAP] Cette équation implique |C|=6, en contradiction avec |C|>=7 : à corriger.
+
+Une fois deux cycles disjoints $C_1, C_2$ obtenus~: partir de la partition $(C_1, V \setminus C_1)$
+et déplacer itérativement chaque sommet mauvais ($\dext > \dint$, i.e.\ $\dext \geq 2$ pour $k=3$).
+$C_1$ et $C_2$ ne se vident jamais, donc le processus termine.
+% [GAP] Argument de terminaison formel manquant (fonction potentielle suggérée).
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[S3.2.4] Cas k=4 (original §3.2.4)}
+% ------------------------------------------------------------------
+\textbf{[GAP — preuve non écrite, renvoi informel aux arguments k=3]}
+
+Même stratégie que k=3 : deux cycles disjoints + déplacement des mauvais sommets.
+Exception~: $K_5$.
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[S4] Squelette §4 sur les graphes 5-réguliers (original §4)}
+% ------------------------------------------------------------------
+
+Sections prévues (toutes vides dans l'original)~:
+\begin{itemize}
+    \item Pourquoi un saut de complexité à $k = 5$~?
+    \item Graphes bipartis 5-réguliers
+    \item Graphes avec un cycle hamiltonien
+    \item Graphes planaires
+\end{itemize}
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[S5--6] Conjectures (original §5 / §6)}
+% ------------------------------------------------------------------
+
+Conjecture 1~: tout graphe $k$-régulier, à un nombre fini d'exceptions près,
+admet une partition satisfaisante.
+
+Conjecture 2~: si $G$ admet une partition satisfaisante, il en admet une équilibrée
+(chaque partie de taille $\geq \alpha |V|$ pour $\alpha > 0$ universel).
+
+\bigskip\hrule\bigskip
+
+% ------------------------------------------------------------------
+\paragraph{[Salt] Preuve alternative pour k=3 (original §Preuve alternative)}
+% ------------------------------------------------------------------
+\textbf{[CANDIDATE for §\ref{subsec:k3} — recommended over S3.2.3]}
+
+Soit $G$ un graphe 3-régulier connexe et $C$ son plus petit cycle.
+Soit $E_{\text{cut}}$ le nombre d'arêtes entre $C$ et $G \setminus C$.
+
+\medskip\textit{Cas $|C| = 3$ ($E_{\text{cut}} = 3$)~:}
+\begin{enumerate}
+    \item \textit{Un sommet de $G \setminus C$ lié aux 3 sommets de $C$~:}
+          $G \simeq K_4$, pas de partition satisfaisante.
+    \item \textit{Un sommet lié à exactement 2 sommets de $C$~:}
+          on l'incorpore à $C$~; $E_{\text{cut}}$ passe à 2, puis éventuellement à 1.
+          Dans tous les sous-cas, $G \setminus C$ reste non vide et $(C, G \setminus C)$
+          est satisfaisante.
+    \item \textit{Tout sommet lié à au plus 1 sommet de $C$~:}
+          $G \setminus C$ non vide, partition $(C, G \setminus C)$ directement satisfaisante.
+\end{enumerate}
+
+\medskip\textit{Cas $|C| \geq 4$~:}
+\begin{itemize}
+    \item Tout sommet de $G \setminus C$ a au plus 2 voisins dans $C$
+          (sinon cycle plus court).
+    \item Si un sommet a exactement 2 voisins dans $C$, ceux-ci sont opposés dans $C$.
+    \item Un seul tel sommet~: partition satisfaisante.
+    \item Deux tels sommets~: $G \simeq K_{3,3}$, pas de partition satisfaisante.
+    \item Sinon (au plus 1 voisin dans $C$)~: partition satisfaisante directe.
+\end{itemize}
+
+% NOTE: this proof handles the exceptions cleanly (K4 and K_{3,3} appear naturally).
+% Recommended as the canonical proof for §4.4.
+
+\end{document}

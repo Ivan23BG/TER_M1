@@ -336,4 +336,60 @@ En conclusion de ce rapport on résume les résultats de nos recherches sur les 
     Alors \(G\) admet une partition satisfaisante où les deux parties sont proportionnellement équilibrées, c'est-à-dire que la taille de chaque partie est au moins un certain pourcentage de la taille totale du graphe.
 \end{conjecture}
 
-% TODO: discuss and present results of research on this conjecture here
+% TODO: discuss and present results of research on this conjecture 
+
+
+
+
+
+
+
+% TODO: move this part to the appropriate associated section
+\section*{Preuve alternative pour le cas k=3}
+
+Soit \(G\) un graphe \(3\)-régulier connexe.
+Soit \(C\) le plus petit cycle de \(G\).
+
+On notera \(E_{\text{cut}}\) le nombre d'arêtes qui va de \(C\) vers \(G \setminus C\).
+
+Si \(C\) est de taille \(3\) alors \(E_{\text{cut}} = 3\).
+On étudie alors plusieurs cas:
+
+\subsection*{Premier cas: un sommet de \(G\) est relié à tous les sommets de \(C\)}
+
+Après avoir rajouté ce sommet à \(C\), il n'y a plus aucun sommet dans \(G\) car il est connexe.
+Ainsi \(\bb K_4\) est le seul graphe \(3\)-régulier qui rentre dans ce cas, il n'admet pas de partition satisfaisante.
+
+\subsection*{Deuxieme cas: un sommet de \(G\) est relié à deux sommets de \(C\)}
+
+Après avoir rajouté ce sommet à \(C\), on a donc \(E_{\text{cut}}\) qui diminue de 2 (car les deux arêtes liées au sommet de \(G\) ne traversent donc plus la coupe) et qui augmente de 1 car le nouveau sommet qu'on a rajouté est lié à exactement un voisin de \(G \setminus C\).
+
+En somme, on a \(E_{\text{cut}} = 2\) après le rajout de ce sommet à \(C\).
+
+Si il n'y a plus aucun sommet de \(G\) relié à deux sommets de \(C\) alors tous les sommets de \(G\) et de \(C\) sont satisfaits et on a alors trouvé une partition satisfaisante.
+
+Sinon, on rajoute ce sommet à \(C\) et on a \(E_{\text{cut}} = 1\).
+Comme \(C\) contient alors exactement 5 sommets, \(G\setminus C\) doit contenir au moins un sommet (même 3) car \(G\) est \(k\)-régulier (donc a un nombre pair de sommets).
+Donc \(G\setminus C\) est non vide et on a alors trouvé une partition satisfaisante de notre graphe.
+
+\subsection{Troisieme cas: tout sommet de \(G\) est relié à au plus un sommet de \(C\)}
+
+Par le même argument que ci-dessus, \(G\setminus C\) est non vide et les deux ensembles sont satisfaits donc on a trouvé une partition satisfaisante.
+
+\medskip
+
+Si maintenant notre plus petit cycle \(C\) est de taille 4 ou plus on a alors les cas suivants:
+% peutetre specifier ici que si n=4 alors on a un k4 ce qui est impossible donc n au moins 6
+\begin{itemize}
+    \item Si un sommet de \(G\setminus C\) est relié à trois sommets de \(C\) alors on peut former un cycle de taille \(<4\). 
+    Donc tout sommet de \(G\setminus C\) est relié à au plus deux sommets de \(C\).
+
+    \item Si tout sommet de \(G\setminus C\) est relié à au plus un sommet de \(C\) alors on a une partition satisfaisante car \(G\setminus C\) non vide.
+
+    \item Si un sommet de \(G\setminus C\) est relié à exactement 2 éléments de \(C\) alors:
+    \begin{enumerate}
+        \item Ils doivent être ``opposés'' dans le cycle, sinon on formerait un cycle plus plus petit avec ce nouveau sommet
+        \item Si il existe un deuxième sommet avec les mêmes contraintes alors on est dans le cas \(\bb K_{3,3}\) sans partition satisfaisante
+        \item Sinon, encore une fois \(G\setminus C\) non vide et il existe une partition satisfaisante.
+    \end{enumerate}
+\end{itemize}
