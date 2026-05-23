@@ -1,0 +1,38 @@
+% ============================================================
+\section{Les cas \(k \geq 5\)}\label{sec:saut_complexite}
+% ============================================================
+
+On a vu dans les sections précédentes que les graphes réguliers de degré 3 et 4 admettent tous une partition satisfaisante.
+Il est donc naturel de se demander si cette propriété se maintient pour les graphes réguliers de degré 5 ou plus.
+
+On détaille dans la suite des différents résultats liés à cette question.
+
+\subsection{Le saut de complexité entre \(k = 4\) et \(k = 5\)}
+
+Dans le cas \(k = 4\), un des arguments principaux utilisés pour démontrer l'existence d'une partition satisfaisante est l'existence de deux \emph{noyaux}.
+Plus formellement, on définit un noyau comme suit:
+
+\begin{definition}
+    Soit \(G = (V, E)\) un graphe et \(t\) un entier positif.
+    Un \(t\)-\defemph{noyau} de \(G\) est un ensemble de sommets \(N \subseteq V\) tel que pour tout sommet \(u \in N\), on a \(\deg_N(u) \geq t\).
+\end{definition}
+
+Dans le cas des graphes \(k\)-réguliers, l'existence de deux \(\left\lceil \frac{k}{2} \right\rceil\)-noyaux disjoints garantit l'existence d'une partition satisfaisante.
+
+Pour \(k = 4\), un 2-noyau correspond simplement à un sous-graphe de degré minimum 2, c'est-à-dire un cycle ou une composante connexe contenant au moins un cycle.
+Un tel objet est relativement facile à trouver en général et d'autant plus facile à caractériser lors d'une recherche algorithmique.
+
+Cependant, pour \(k = 5\), un 3-noyau correspond à un sous-graphe de degré minimum 3, ce qui est beaucoup plus contraignant.
+
+Un tel sous-graphe doit nécessairement contenir une structure plus complexe que les simples cycles, et ces structures sont plus difficiles à identifier et à manipuler dans le cadre d'une preuve d'existence mais surtout dans le cadre d'une recherche algorithmique.
+
+Heureusement, un des résultats que nous avons obtenus est que pour un graphe d'une certaine taille, on n'a besoin que d'un seul \(t\)-noyau pour garantir l'existence d'une partition satisfaisante car l'existence d'un second noyau est assurée par le nombre d'arêtes du graphe.
+
+\subsection{Le cas \(k = 6\) et au-delà}
+
+Tout comme pour \(k = 5\), les cas \(k \geq 7\) présentent des difficultés similaires liées à la complexité croissante des noyaux nécessaires pour garantir l'existence d'une partition satisfaisante.
+Ces cas sont d'ailleurs toujours ouverts au moment de la rédaction de ce rapport.
+
+Cependant, pour \(k = 6\), la conjecture est vérifiée et tous les graphes 6-réguliers à au moins 12 sommets~\cite{barnkopf2024note}.
+
+On ne redémontrera pas ce résultat dans ce rapport mais l'idée de la preuve repose sur un comptage fin des arêtes traversant la partition et de montrer qu'elles forcent l'existence de noyaux et donc de partitions satisfaisantes.

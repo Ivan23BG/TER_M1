@@ -1,0 +1,17 @@
+% ============================================================
+\section{État de l'art}\label{sec:art}
+% ============================================================
+Bien que le partitionnement de graphes soit un domaine classique de l'optimisation combinatoire, l'étude spécifique des partitions satisfaisantes est plus récente. 
+Notre analyse s'appuie principalement sur les travaux fondateurs de Bazgan, Tuza et Vanderpooten (2010)~\cite{bazgan2010satisfactory}, l'état de l'art des alliances défensives par Yero et Rodríguez-Velázquez (2018)~\cite{yero2013defensive}, ainsi que les algorithmes structurels présentés par Gaikwad, Maity et Tripathi (2020)~\cite{gaikwad2020satisfactory}.
+
+Nos connaissances sur la complexité du problème se résument ainsi:
+\begin{itemize}
+    \item \textbf{NP-complétude:} Déterminer si un graphe quelconque admet une partition satisfaisante est NP-complet~\cite{yero2013defensive}.
+    \item \textbf{Cas polynomiaux:} Le problème devient polynomial pour les graphes à clique-width bornée~\cite{gaikwad2020satisfactory} et pour les graphes de degré maximal restreint ($\Delta(G) \leq 4$)~\cite{bazgan2010satisfactory}.
+\end{itemize}
+
+D'autres travaux ont exploré des variantes du problème, notamment les partitions satisfaisantes avec des contraintes supplémentaires sur les tailles des parties, les degrés des sommets, ou même le nombre de parties dans la partition.
+Cependant, la question de l'existence d'une partition satisfaisante pour les graphes \(k\)-réguliers, en particulier pour \(k \geq 5\), reste largement ouverte et constitue l'une des principales motivations de notre étude.
+
+D'autre part, beaucoup de résultats présents dans ces papiers s'intéressent à trouver des bornes sur certaines propriétés des graphes qui garantissent ou empêchent l'existence d'une partition satisfaisante.
+Dans ce papier, on s'est plus concentré sur la manière d'en trouver si il en existe une et sur la construction de graphes qui n'en admettent pas pour attaquer la conjecture au début de la section suivante.

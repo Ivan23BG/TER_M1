@@ -1,18 +1,49 @@
-\input{../assets/macros/math.tex}
-\input{../assets/macros/theorems.tex}
+\input{../assets/math/base.tex}
+\input{../assets/environments/base.tex}
+\input{../assets/tikz/base.tex}
+\input{../assets/themes/more_colours.tex}
+\input{../assets/language/python.tex}
 \input{../assets/module_header.tex}
 \usepackage[a4paper,hmargin=30mm,vmargin=30mm]{geometry}
+
+
 
 \title{\color{astral} \sffamily \bfseries TER M1 --- Rapport}
 \author{Ivan Lejeune}
 \date{\today}
 
 \begin{document}
-    \maketitle
+    \input{./0_frontpage.tex}
+
+    \newpage
     \tableofcontents
 
     \newpage
-    \input{./rapport_1.tex}
+    \input{./1_presentation.tex}
+    
+    
+    \input{./2_motivations.tex}
+    
+    \newpage
+    \input{./3_etat_de_l_art.tex}
+
+    
+    \input{./4_resultats_de_base.tex}
+
+    \input{./5_saut_complexite.tex}
+
+    \input{./6_code.tex}
+    %TODO: add a section sur ce qu'on a créé, les codes pythons, les méthodes de recherche, les résultats et tentatives
+
+    %TODO: add a section observations/remarques
+
+    %TODO section bilan conclusion et perspectives
+
+    
+
+
+    \newpage
+    \input{./99_biblio.tex}
     
 
 \end{document}

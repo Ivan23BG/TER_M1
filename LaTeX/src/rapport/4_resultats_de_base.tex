@@ -1,0 +1,419 @@
+
+% ============================================================
+% Ancienne version conservée en commentaire
+% ============================================================
+
+% \section{Résultats de bases}\label{sec:s_4}
+%
+% On présente dans cette section des preuves de résultats importants sur les partitions satisfaisantes,
+% notamment pour les graphes non connexes et les graphes \(k\)-réguliers pour \(k \leq 4\).
+
+% ============================================================
+\section{Résultats pour les graphes \(k\)-réguliers (\(k \leq 4\))}\label{sec:results}
+% ============================================================
+
+On s'intéresse dans cette section à l'existence de partitions satisfaisantes dans les graphes \(k\)-réguliers, c'est-à-dire les graphes où chaque sommet a exactement \(k\) voisins.
+
+On va montrer quelques résultats fondamentaux pour étudier la conjecture suivante:
+
+\begin{conjecture}
+    Pour tout entier \(k\), tous les graphes \(k\)-réguliers, sauf un nombre fini d'exceptions, admettent une partition satisfaisante.
+\end{conjecture}
+
+% ============================================================
+% Ancienne sous-section conservée en commentaire
+% ============================================================
+
+% \subsection{Les graphes non connexes}\label{subsec:ss4_1}
+%
+% On montre dans cette partie que tout graphe non connexe admet une partition satisfaisante.
+
+% ============================================================
+\subsection{Réduction aux graphes connexes}
+% ============================================================
+
+% Ancienne version conservée:
+%
+% \begin{proposition}\label{prop:4_1_1}
+%     Si \(G\) est un graphe non connexe alors \(G\) admet une partition satisfaisante.
+% \end{proposition}
+%
+% \begin{proof}
+%     Soit \(A\) une composante connexe de \(G\) et \(B = V \setminus A\) le reste des sommets (non vide car \(G\) est non connexe).
+%     On considère la partition \((A, B)\) de \(V\).
+%
+%     Soit \(x\) un sommet de \(A\).
+%     On a \(d_A(x) \geq 1\) car \(A\) est connexe (et donc chaque sommet de \(A\) a au moins un voisin dans \(A\)).
+%
+%     On a aussi \(d_B(x) = 0\) car il n'y a pas d'arêtes entre \(A\) et \(B\).
+%
+%     Ainsi, pour tout sommet \(x\) de \(A\), on a \(d_A(x) > d_B(x)\).
+%
+%     Soit \(y\) un sommet de \(B\).
+%     On a \(d_A(y) = 0\) car il n'y a pas d'arêtes entre \(A\) et \(B\).
+%
+%     Comme \(d_X(y) \geq 0\) pour tout ensemble \(X\), on a \(d_B(y) \geq 0\).
+%
+%     Ainsi, pour tout sommet \(y\) de \(B\), on a \(d_B(y) \geq d_A(y)\).
+%
+%     On a donc montré que pour tout sommet \(x\) de \(V\), le degré interne de \(x\) est supérieur ou égal à son degré externe pour la partition \((A, B)\).
+%     Ainsi, \((A, B)\) est une partition satisfaisante de \(G\).
+% \end{proof}
+
+\begin{proposition}
+    Tout graphe non connexe admet une partition satisfaisante.
+\end{proposition}
+
+\begin{proof}\,\\
+    Soit \(G=(V,E)\) un graphe non connexe.
+
+    Il existe au moins une composante connexe \(A \subset V\) telle que \(B = V \setminus A \neq \emptyset\).
+    Considérons la partition \((A, B)\).
+
+    Par définition d'une composante connexe, il n'existe aucune arête entre \(A\) et \(B\).
+    Ainsi, pour tout \(x \in A\), \(\dext(x) = 0\).
+
+    Comme le degré d'un sommet est toujours positif, on a pour tout \(x \in A\):
+    \[
+        \dint(x) \geq 0 = \dext(x).
+    \]
+
+    Le même raisonnement s'applique à tout \(y \in B\), où:
+    \[
+        \dext(y) = 0 \leq \dint(y).
+    \]
+
+    La partition \((A, B)\) est donc satisfaisante.
+\end{proof}
+
+% Ancienne transition conservée:
+%
+% On considère dans la suite du rapport que tous les graphes sont connexes,
+% car les graphes non connexes admettent toujours une partition satisfaisante.
+
+Par conséquent, on se restreindra sans perte de généralité aux graphes connexes dans la suite.
+
+% ============================================================
+% Ancienne introduction conservée
+% ============================================================
+
+% \subsection{Les graphes \(k\)-réguliers}\label{subsec:ss4_2}
+%
+% On propose d'étudier dans la suite les graphes \(k\)-réguliers pour certains \(k\).
+% Ce sont ces graphes qui sont intéressants pour ce problème et qui sont au cœur
+% d'une des conjectures principales qu'on étudie dans ce rapport:
+%
+% \begin{conjecture}
+%     Soit \(k \in \bb N\).
+%     Tout graphe \(k\)-régulier, sauf un nombre fini d'entre eux, admet une partition satisfaisante.
+% \end{conjecture}
+
+% ============================================================
+\subsection{Analyse systématique par degré}
+% ============================================================
+
+La conjecture étant ouverte pour les graphes \(k\)-réguliers avec \(k \geq 5\), on propose d'étudier au cas par cas les graphes \(k\)-réguliers pour \(k \leq 4\) afin d'obtenir des résultats de base et de mieux comprendre les mécanismes à l'œuvre dans la formation de partitions satisfaisantes.
+
+\subsubsection{Le cas \(k=1\)}
+
+Un graphe \(1\)-régulier connexe est isomorphe à \(K_2\).
+Il n'admet aucune partition puisque séparer les deux sommets produit deux ensembles de degré interne nul et externe égal à \(1\).
+
+% TODO:TIKZ
+
+\subsubsection{Le cas \(k=2\)}
+
+Un graphe \(2\)-régulier connexe est un cycle \(C_n\).
+
+Si \(n=3\), \(G\) est isomorphe à \(K_3\) et n'admet pas de partition satisfaisante.
+
+Si \(n \geq 4\), la partition:
+\[
+    (\{x,y\}, V \setminus \{x,y\})
+\]
+où \((x,y) \in E\) est satisfaisante.
+
+En effet, pour tout sommet \(z\) de \(G\):
+
+- si \(z \in \{x,y\}\), alors:
+\[
+    \dint(z)=1 \quad \text{et} \quad \dext(z)=1 ;
+\]
+
+- si \(z \in V \setminus \{x,y\}\), alors:
+\[
+    \dint(z)\geq1 \quad \text{et} \quad \dext(z)\leq1.
+\]
+
+Ainsi, tous les sommets vérifient \(\dint(z) \geq \dext(z)\) et la partition est satisfaisante.
+
+% ============================================================
+\subsubsection{Le cas \(k = 3\)}\label{subsubsec:ss4_2_3}
+% ============================================================
+
+Soit \(G\) un graphe \(3\)-régulier.
+On raisonne sur la taille du plus petit cycle de \(G\).
+
+Soit \(C\) le plus petit cycle de \(G\).
+
+Supposons que \(C\) est de longueur \(3\), c'est-à-dire que \(C\) est un triangle.
+
+Le nombre d'arêtes sortant de \(C\) est alors exactement \(3\), car \(G\) est \(3\)-régulier.
+
+\begin{itemize}
+
+    \item Si un sommet \(x \in G \setminus C\) est relié à tous les sommets de \(C\), alors \(G\) est isomorphe à \(K_4\) et n'admet pas de partition satisfaisante (voir figure~\ref{fig:c3_plus_3}).
+
+    \vspace{2mm}
+    \input{./tikz/c3+3.tex}
+
+    En effet, il n'y a plus d'arêtes sortant de \(C \cup \{x\}\) et \(G\) est connexe, donc:
+    \[
+        G \setminus (C \cup \{x\}) = \emptyset.
+    \]
+
+    \item Si un sommet \(x \in G \setminus C\) est relié à exactement deux sommets de \(C\), alors l'ensemble:
+    \[
+        A = C \cup \{x\}
+    \]
+    possède exactement deux arêtes sortantes.
+
+    \vspace{2mm}
+    \input{./tikz/c3+2.tex}
+
+    Si aucun sommet de \(G \setminus A\) n'est relié à deux sommets de \(A\), alors tous les sommets sont satisfaits pour la partition \((A, V \setminus A)\) (voir figure~\ref{fig:c3_plus_2_plus_0}).
+
+    Sinon, on ajoute ce sommet à \(A\) et on obtient encore une partition satisfaisante (voir figure~\ref{fig:c3_plus_2_plus_2}):
+
+    \vspace{2mm}
+
+    \begin{figure}[H]
+        \CenterFloatBoxes{}
+        \begin{floatrow}
+
+            \input{./tikz/c3+2+0.tex}
+
+            \input{./tikz/c3+2+2.tex}
+
+        \end{floatrow}
+    \end{figure}
+
+    \item Si tout sommet de \(G \setminus C\) est relié à au plus un sommet de \(C\), alors \(G \setminus C\) est non vide et tous les sommets sont satisfaits pour la partition  \((C, V \setminus C)\) (voir figure~\ref{fig:c3_plus_0}).
+
+    \vspace{2mm}
+    \input{./tikz/c3+0.tex}
+
+\end{itemize}
+
+Supposons maintenant que \(C\) est de longueur au moins \(4\).
+
+\begin{itemize}
+
+    \item Si un sommet de \(G \setminus C\) est relié à trois sommets de \(C\), alors on peut former un cycle strictement plus petit que \(C\), ce qui contredit la minimalité de \(C\) (voir figure~\ref{fig:c4_plus_3}).
+
+    \vspace{2mm}
+    \input{./tikz/c4+3.tex}
+
+    Donc tout sommet de \(G \setminus C\) est relié à au plus deux sommets de \(C\).
+
+    \item Si tout sommet de \(G \setminus C\) est relié à au plus un sommet de \(C\), alors la partition \((C, V \setminus C)\) est satisfaisante (même cas que la figure~\ref{fig:c3_plus_0}).
+
+    \item Si un sommet de \(G \setminus C\) est relié à exactement deux sommets de \(C\), alors:
+
+    \begin{itemize}
+
+        \item ces deux sommets doivent être opposés dans \(C\), sinon on obtiendrait un cycle plus petit ;
+
+        \item s'il existe un second sommet vérifiant la même propriété, alors soit:
+        \[
+            G \simeq K_{3,3},
+        \]
+        qui n'admet pas de partition satisfaisante (voir figure~\ref{fig:c4_plus_2_plus_2}), soit on obtient une partition satisfaisante en ajoutant ces deux sommets à \(C\) (voir figure~\ref{fig:c4_plus_2_plus_2_1}).
+
+        \vspace{2mm}
+
+        \begin{figure}[H]
+            \CenterFloatBoxes{}
+            \begin{floatrow}
+
+                \input{./tikz/c4+2+2.tex}
+
+                \input{./tikz/c4+2+2+1.tex}
+
+            \end{floatrow}
+        \end{figure}
+
+        On voit aussi que pour \(|C| \geq 4\), on tombera toujours dans le cas de la figure~\ref{fig:c4_plus_2_plus_2_1} après avoir rajouté un certain nombre de sommets à \(C\).
+
+        \item sinon, \(G \setminus C\) est non vide et il existe encore une partition satisfaisante.
+
+    \end{itemize}
+
+\end{itemize}
+
+% ============================================================
+% Ancienne preuve du cas \(k=4\) conservée
+% ============================================================
+
+% \subsubsection{Le cas \(k = 4\)}\label{subsubsec:ss4_2_4}
+%
+% On peut appliquer le même raisonnement que pour le cas \(k = 3\)
+% car ici aussi la sous-structure satisfaisante à trouver est un cycle.
+%
+% Cependant on propose ici une preuve différente utilisant les \(2\)-noyaux.
+%
+% \begin{definition}
+%     Soit \(G = (V, E)\) un graphe et \(p \in \bb N\).
+%     Un \(p\)-noyau de \(G\) est un ensemble de sommets
+%     \(S \subseteq V\) tel que:
+%     \[
+%         \deg_S(x) \geq p
+%     \]
+%     pour tout sommet \(x \in S\).
+% \end{definition}
+%
+% \begin{proposition}\label{prop:4_2_4}
+%     Tout graphe \(4\)-régulier qui n'est pas \(K_5\)
+%     admet une partition satisfaisante.
+% \end{proposition}
+%
+% \begin{proof}
+% ...
+% \end{proof}
+
+% ============================================================
+\subsubsection{Le cas \(k=4\): preuve par recherche locale}
+% ============================================================
+
+Pour les graphes \(4\)-réguliers, on utilise une approche un peu différente.
+On va d'abord commencer par prouver le lemme suivant:
+
+\begin{lemma}
+    Tout graphe \(4\)-régulier connexe, à l'exception du graphe complet \(K_5\), contient au moins deux cycles sommets-disjoints.
+\end{lemma}
+
+\begin{proof}
+    Soit \(G=(V,E)\) un graphe \(4\)-régulier connexe.
+    Si \(G\) est isomorphe à \(K_5\), il possède exactement 5 sommets. 
+    Comme un cycle simple requiert au moins 3 sommets, \(K_5\) ne peut pas contenir deux cycles sommets-disjoints (car \(3 + 3 = 6 > 5\)).
+
+    Supposons désormais que \(G\) n'est pas isomorphe à \(K_5\). 
+    Le graphe \(G\) étant fini et contenant des cycles (car il est connexe et \(4\)-régulier), on peut définir \(C\) comme un cycle de longueur minimale dans \(G\). 
+    On note \(c = |C|\).
+
+    Par minimalité, \(C\) est un cycle induit sans corde: chaque sommet de \(C\) possède exactement 2 voisins dans \(C\), et donc exactement \(4 - 2 = 2\) voisins dans \(V \setminus C\). 
+    Le nombre total d'arêtes entre \(C\) et \(V \setminus C\) est donc exactement égal à \(2c\).
+
+    Supposons par l'absurde que \(G \setminus C\) ne contient aucun cycle. 
+    Alors, le sous-graphe \(T = G \setminus C\) est une forêt. Notons \(t = |T|\) son nombre de sommets.
+
+    Dans une forêt à \(t\) sommets, le nombre d'arêtes internes est au plus \(t - 1\). 
+    En appliquant le lemme des poignées de main au sous-graphe \(T\), la somme des degrés internes \(\dint(u)\) au sein de la forêt vérifie:
+
+    \begin{equation}\label{eq:somme_foret}
+        \sum_{u \in T} \dint(u) = 2|E(T)| \leq 2t - 2
+    \end{equation}
+
+    Par ailleurs, chaque sommet \(u \in T\) a un degré total de 4 dans \(G\). 
+    Sa contribution au degré interne de \(T\) et ses voisins sur \(C\) vérifient la relation \(\dint(u) + \deg_C(u) = 4\). 
+    En sommant cette égalité sur l'ensemble \(T\), on obtient:
+
+    \begin{equation*}
+        \sum_{u \in T} \dint(u) = \sum_{u \in T} (4 - \deg_C(u)) = 4t - e(T, C)
+    \end{equation*}
+
+    Où \(e(T,C)\) représente le nombre total d'arêtes reliant \(T\) et \(C\). 
+    Nous avons établi que \(e(T,C) = 2c\). Ainsi, la somme des degrés internes vaut exactement \(4t - 2c\). 
+    En injectant ce résultat dans l'inéquation~\eqref{eq:somme_foret}, il vient:
+
+    \begin{equation*}
+        4t - 2c \leq 2t - 2 \implies 2t + 2 \leq 2c \implies c \geq t + 1
+    \end{equation*}
+
+    Analysons maintenant la structure de la forêt \(T\). 
+    Toute forêt non vide possède au moins une feuille (ou un sommet isolé) \(u\) tel que son degré interne dans \(T\) vérifie \(\dint(u) \leq 1\).
+    Pour un tel sommet, le nombre de connexions vers le cycle \(C\) est au moins égal à:
+
+    \begin{equation*}
+        \deg_C(u) = 4 - \dint(u) \geq 3
+    \end{equation*}
+
+    Le sommet \(u \in T\) possède donc au moins 3 voisins distincts sur le cycle \(C\). 
+    Ces 3 voisins découpent le cycle \(C\) en trois chemins disjoints dont la somme des longueurs vaut \(c\). 
+    Par le principe des tiroirs, l'un de ces chemins possède une longueur au plus égale à \(\lfloor c/3 \rfloor\). 
+    En reliant les extrémités de ce court chemin via le sommet \(u\), on forme un nouveau cycle dans \(G\) dont la longueur est au plus \(\lfloor c/3 \rfloor + 2\).
+
+    Par minimalité de la longueur de \(C\), ce nouveau cycle ne peut pas être strictement plus court que \(C\), ce qui impose la condition structurelle:
+
+    \begin{equation*}
+        c \leq \left\lfloor \frac{c}{3} \right\rfloor + 2
+    \end{equation*}
+
+    Cette inégalité n'est vérifiée que pour \(c = 3\) (un triangle). 
+    En effet, pour tout \(c \geq 4\), on a \(\lfloor c/3 \rfloor + 2 < c\).
+
+    Si \(c = 3\), notre inégalité précédente \(c \geq t + 1\) devient \(3 \geq t + 1\), ce qui implique \(t \leq 2\). 
+    Le nombre total de sommets de notre graphe connexe \(G\) est alors \(|V| = c + t \leq 3 + 2 = 5\). 
+    Le seul graphe connexe \(4\)-régulier ayant au maximum 5 sommets est le graphe complet \(K_5\).
+
+    Cela contredit notre hypothèse de départ selon laquelle \(G\) n'est pas isomorphe à \(K_5\). 
+    Par conséquent, l'hypothèse d'absurde est fausse: le sous-graphe \(G \setminus C\) contient nécessairement au moins un cycle, ce qui garantit l'existence de deux cycles sommets-disjoints dans \(G\).
+\end{proof}
+
+Ensuite, on va utiliser ce lemme pour construire un algorithme qui va créer une partition satisfaisante à partir de ces deux cycles sommets-disjoints.
+
+\begin{theorem}
+    Tout graphe \(4\)-régulier connexe, à l'exception du graphe complet \(K_5\), admet une partition satisfaisante.
+\end{theorem}
+
+\begin{proof}\,\\
+    Soit \(G=(V,E)\) un graphe \(4\)-régulier connexe différent de \(K_5\).
+
+    On sait d'après le lemme précédent que \(G\) contient au moins deux cycles sommets-disjoints. Soit \(C_1\) et \(C_2\) ces deux cycles. On peut construire une partition de \(V\) en deux ensembles \(A\) et \(B\) de la manière suivante:
+    \begin{itemize}
+        \item \(A\) contient tous les sommets de \(C_1\) et tous les sommets de \(G\) qui sont reliés à au moins deux sommets de \(C_1\).
+        \item \(B = V \setminus A\).
+    \end{itemize}
+
+    Par construction, tous les sommets de \(A\) ont au moins deux voisins dans \(A\) (car ils sont soit dans \(C_1\), soit reliés à au moins deux sommets de \(C_1\)). De plus, comme \(G\) est \(4\)-régulier, chaque sommet de \(A\) a au plus deux voisins dans \(B\). Ainsi, pour tout sommet \(x \in A\), on a \(\dint(x) \geq 2 \geq \dext(x)\).
+
+    Pour les sommets de \(B\), si ils ne sont pas satisfaits on va les ajouter à \(A\) et répéter le processus jusqu'à ce que tous les sommets soient satisfaits. 
+
+    Comme \(B\) contient le cycle \(C_2\) qui est disjoint de \(C_1\), \(B\) ne sera jamais vidé par le processus car il y aura toujours au moins les sommets de \(C_2\) qui restent dans \(B\). Par conséquent, le processus s'arrêtera à un moment donné avec une partition \((A, B)\) telle que tous les sommets de \(A\) sont satisfaits et tous les sommets de \(B\) sont satisfaits.
+
+    Ainsi, \(G\) admet une partition satisfaisante.
+\end{proof}
+
+% ============================================================
+% Notes de travail conservées
+% ============================================================
+
+% Réunion 4, le 26/03
+%
+% Changement dans les preuves. À relire.
+%
+% k=5:
+% - regarder les cas hamiltoniens ;
+% - regarder les cas bipartis.
+%
+% Remarque:
+% dans un graphe 5-régulier, si il y a une clique de taille 5,
+% cela semble fonctionner (preuve à revoir).
+%
+% Question:
+% que dire si il y a une clique de taille 4 ?
+%
+% Remarque:
+% deux \(K_5\) reliés par un couplage possèdent une unique partition
+% (les deux \(K_5\)).
+%
+% Cela peut-il aider pour trouver un contre-exemple
+% à la conjecture de la partition équilibrée ?
+%
+% Algorithmes implémentés:
+% - heuristique pour partition (random puis équilibrage) ;
+% - algorithme exact pour les graphes 3-réguliers ;
+% - algorithme exact pour les graphes 4-réguliers.
+%
+% À implémenter:
+% - recherche exhaustive (fixer un sommet puis partitionner le reste).

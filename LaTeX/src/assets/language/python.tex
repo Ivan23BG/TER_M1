@@ -1,0 +1,22 @@
+\lstdefinelanguage{python}{
+    keywords={def, class, if, else, elif, for, while, try, except, finally, with, as, import, from, return, yield, lambda, True, False, None},
+    sensitive=true,
+    comment=[l]{\#},
+    morestring=[b]", % chktex 18
+}
+\lstdefinestyle{python-style}{
+    language=python,
+    basicstyle=\ttfamily\small\color{codetext},
+    keywordstyle=\color{keywordcolor},
+    commentstyle=\color{commentcolor},
+    backgroundcolor=\color{codebg},
+    frame=single,
+    framerule=0.5pt,
+    rulecolor=\color{codeframe},
+    tabsize=2,
+    columns=fullflexible,
+    keepspaces=true,
+    showstringspaces=false,
+}
+
+\newcommand{\pythonFile}[1]{\lstinputlisting[style=python-style]{#1}}

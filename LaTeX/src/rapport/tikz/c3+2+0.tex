@@ -1,5 +1,5 @@
 \ffigbox[\FBwidth]{%
-\caption{\centering Graphe \(G\) avec 3-cycle \(C\) et un 2-sommet puis rien}\label{fig:c3_plus_2_plus_0}
+\caption{\centering Graphe \(G\) avec un 3-cycle \(C\) et un 2-sommet \(x\) puis rien}\label{fig:c3_plus_2_plus_0}
 }{
     \fbox{
         \begin{tikzpicture}[scale=1, main node/.style={circle, draw, fill=blue!20, inner sep=1pt, font=\scriptsize, minimum size=5mm, text=black}]
@@ -21,7 +21,7 @@
             
             % ellipse autour de G
             \node[ellipse, draw, thick, fill=blue!20,
-                minimum width=2.6cm, minimum height=3.6cm] (Gnode) at (4,1) {\(G\)};
+                minimum width=2.6cm, minimum height=3.6cm] (Gnode) at (4,1) {\(G \setminus A\)};
             % lignes vers G (au lieu de vers le haut)
             \draw[draw=blue, dashed] (c2) -- (Gnode);
             \draw[draw=blue, dashed] (x) -- (Gnode);

@@ -75,7 +75,8 @@
 
 % --- Custom exercise counter, reset per section ---
 \newcounter{tdcounter}
-\counterwithin{tdcounter}{section}
+% \counterwithin{tdcounter}{section}
+\counterwithout{tdcounter}{section} 
 
 % --- Exercise environment: colored, numbered per section ---
 \mytheorem{td-exo}{Exercice}{astral}{tdcounter}{o}

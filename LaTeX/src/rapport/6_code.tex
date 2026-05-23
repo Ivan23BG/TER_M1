@@ -1,0 +1,60 @@
+% ============================================================
+\section{Méthodes de recherche}\label{sec:methods}
+% ============================================================
+
+Dans notre étude du problème de partition satisfaisante on a fait beaucoup de recherche avec plusieurs méthodes différentes.
+Dans un premier temps, on va montrer le code qu'on a utilisé pour expérimenter et confirmer des résultats théoriques.
+Puis, on va présenter des différents axes de recherche qu'on a suivis pour essayer de développer le terrain autour de cette conjecture.
+
+\subsection{Le code}
+
+Tout au long de ce projet, on a développé un code en Python pour expérimenter avec les graphes et les partitions satisfaisantes.
+Ce code nous a permis de tester différentes hypothèses, de construire des exemples de graphes qui n'admettent pas de partition satisfaisante, et de vérifier la conjecture pour des graphes de petite taille.
+
+On a commencé par créer des algorithmes de base capables de trouver des partitions satisfaisantes pour des graphes de petite taille en utilisant des méthodes différentes.
+
+La première méthode est le brute-force.
+Etnant donné qu'il y a conséquemment plus de graphes admettant une partition satisfaisante que de graphes n'en admettant pas, on peut partir du principe qu'en général, il existe une partition satisfaisante pour un graphe donné et celle-ci peut être trouvée en testant aléatoirement des partitions du graphe:
+
+\pythonFile{./code/brute_force.py}
+
+Cela marche bien en pratique mais dans la théorie, il n'y a aucune garantie que ce processus va trouver une partition satisfaisante en un temps raisonnable.
+Alors, on a décidé de coder un algorithme plus intelligent qui implémente le processus décrit lors des preuves dans les sections précédentes.
+L'idée est de construire une partition en partant d'un noyau et en ajoutant les sommets un par un en respectant les conditions de la partition satisfaisante.
+Voici une implémentation de cette idée:
+
+\pythonFile{./code/greedy.py}
+
+Cette fois-ci, on a une garantie que si une partition satisfaisante existe, elle sera trouvée en un temps raisonnable.
+Cependant, ce code cache un autre problème: comment trouver les cycles à lui donner en entrée?
+
+Ce code bien qu'adaptable pour un graphe \(k\)-régulier quelconque ne marche en pratique que pour \(k \leq 4\) car trouver les noyaux nécessaires à lui donner n'est pas une tâche facile.
+
+On utilise le code suivant pour trouver un plus petit cycle car un cycle quelconque ne suffit pas:
+
+\pythonFile{./code/smallest_cycle.py}
+
+Ce code n'est pas très efficace mais il suffit étant donné qu'on ne l'utilise que pour des graphes de petite taille.
+
+Enfin, on a aussi développé un code pour générer des graphes aléatoires et tester la conjecture pour ces graphes ainsi que visualiser les partitions satisfaisantes trouvées:
+
+\pythonFile{./code/visualization.py}
+
+Et voici quelques autres codes utilisés pour chercher des partitions:
+
+\pythonFile{./code/other_methods.py}
+
+En mettant tous ces codes ensemble, on peut lancer des tests avec des graphes de petite taille et vérifier la conjecture ainsi que l'efficacité de nos algorithmes:
+
+\pythonFile{./code/test_conjecture.py}
+
+Ce qui nous donne des résultats comme ceci par exemple:
+
+\begin{figure}[H]
+    \centering
+    \includesvg[width=\textwidth]{./code/Figure_1.svg}
+    \caption{Comparaison de différentes partitions satisfaisantes pour un graphe 3-régulier aléatoire de 10 sommets.}
+    \label{fig:partitions_comparison}
+\end{figure}
+
+L'intégralité du code source pour ce projet est disponible sur \url{https://github.com/Ivan23BG/TER_M1}.

@@ -1,0 +1,46 @@
+\ffigbox[\FBwidth]{%
+\caption{\centering Représentation d'une partition satisfaisante $(A, B)$: chaque sommet possède strictement plus de connexions internes (lignes pleines) que de connexions externes (lignes pointillées).}\label{fig:partition_satisfaisante}
+}{
+    \fbox{
+        \begin{tikzpicture}[scale=1.2, node distance={15mm}, main/.style = {draw, circle, font=\sffamily\bfseries, minimum size=7mm, fill=white, thick}]
+        
+        % --- Communauté A (Gauche) ---
+        \node[main, draw=compA] (A1) at (0, 2) {\(A_1\)};
+        \node[main, draw=compA] (A2) at (-1.5, 0.5) {\(A_2\)};
+        \node[main, draw=compA] (A3) at (0, -1) {\(A_3\)};
+        \node[main, draw=compA] (A4) at (1.2, 0.5) {\(A_4\)};
+        
+        % Arêtes internes A
+        \path[draw, compA, ultra thick] (A1) -- (A2);
+        \path[draw, compA, ultra thick] (A2) -- (A3);
+        \path[draw, compA, ultra thick] (A3) -- (A4);
+        \path[draw, compA, ultra thick] (A4) -- (A1);
+        \path[draw, compA, ultra thick] (A1) -- (A3);
+
+        % --- Communauté B (Droite) ---
+        \node[main, draw=compB] (B1) at (4.5, 2) {\(B_1\)};
+        \node[main, draw=compB] (B2) at (3.3, 0.5) {\(B_2\)};
+        \node[main, draw=compB] (B3) at (4.5, -1) {\(B_3\)};
+        \node[main, draw=compB] (B4) at (6, 0.5) {\(B_4\)};
+        
+        % Arêtes internes B
+        \path[draw, compB, ultra thick] (B1) -- (B2);
+        \path[draw, compB, ultra thick] (B2) -- (B3);
+        \path[draw, compB, ultra thick] (B3) -- (B4);
+        \path[draw, compB, ultra thick] (B4) -- (B1);
+        \path[draw, compB, ultra thick] (B2) -- (B4);
+
+        % --- Arêtes de Coupure (Externes) ---
+        \path[draw, gray, thick, dashed] (A4) -- (B2);
+        \path[draw, gray, thick, dashed] (A1) -- (B1);
+        \path[draw, gray, thick, dashed] (A3) -- (B3);
+
+        % --- Arrière-plans (Gaps/Enveloppes) ---
+        \begin{scope}[on background layer]
+            \node[fill=compA!10, ellipse, fit=(A1) (A2) (A3) (A4), label={[compA]above:\textbf{Communauté $A$}}] {};
+            \node[fill=compB!10, ellipse, fit=(B1) (B2) (B3) (B4), label={[compB]above:\textbf{Communauté $B$}}] {};
+        \end{scope}
+
+    \end{tikzpicture}
+    }
+}

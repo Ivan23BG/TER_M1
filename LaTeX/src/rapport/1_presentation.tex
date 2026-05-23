@@ -1,0 +1,24 @@
+% ============================================================
+\section{Introduction et définitions formelles}\label{sec:intro}
+% ============================================================
+Soit \(G = (V, E)\) un graphe simple, non orienté et fini.
+L'objet de ce rapport est l'étude du problème de l'existence d'une \textit{partition satisfaisante} de ses sommets, un concept introduit pour formaliser la notion de cohésion interne au sein de sous-structures de graphes.
+
+\begin{definition}[Degrés interne et externe]\,\\
+    Soit \(G = (V, E)\) un graphe, \((A, B)\) une partition de \(V\) (avec \(A, B \neq \emptyset\), \(A \cap B = \emptyset\) et \(A \cup B = V\)), et \(x \in V\).
+    \begin{itemize}
+        \item Si \(x \in A\), son \defemph{degré interne} est \(\dint(x) = |N(x) \cap A|\) et son \defemph{degré externe} est \(\dext(x) = |N(x) \cap B|\).
+        \item Si \(x \in B\), son \defemph{degré interne} est \(\dint(x) = |N(x) \cap B|\) et son \defemph{degré externe} est \(\dext(x) = |N(x) \cap A|\).
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Partition satisfaisante]\,\\
+    Une partition \((A, B)\) de \(V\) est dite \defemph{satisfaisante} si pour tout sommet \(x \in V\), on a:
+    \begin{equation*}
+        \dint(x) \geq \dext(x)
+    \end{equation*}
+    Un sommet vérifiant cette propriété est dit \textit{satisfait}. 
+    Le problème de décision associé, consistant à déterminer si un graphe admet une telle partition, est noté \textsc{Satisfactory Graph Partition}.
+\end{definition}
+
+Dans la suite de ce rapport, on partira du principe que le lecteur est familier avec les notions de base de la théorie des graphes, telles que les cycles, les arbres, les graphes réguliers entres autres.

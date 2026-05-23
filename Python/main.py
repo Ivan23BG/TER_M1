@@ -367,7 +367,7 @@ fig.delaxes(axes[3])
 
 # Or draw just one
 # plot_single(G, A1, B1, pos=pos, title="Heuristic partition")
-
+plt.savefig("figure.svg", bbox_inches='tight')
 plt.show()
 
 print("Now showing all partitions:")
