@@ -1,5 +1,5 @@
 def exhaustive_search_partition(G):
-    # fix a node in A then try all partitions of the rest to ensure we don't miss the solution
+    # fix a node in A then try all partitions of the rest
     nodes = list(G.nodes())
     n = len(nodes)
     A = {nodes[0]}

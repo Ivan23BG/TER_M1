@@ -1,5 +1,7 @@
 % ============================================================
 \section{Introduction et définitions formelles}\label{sec:intro}
+
+\subsection{Contexte et définitions}
 % ============================================================
 Soit \(G = (V, E)\) un graphe simple, non orienté et fini.
 L'objet de ce rapport est l'étude du problème de l'existence d'une \textit{partition satisfaisante} de ses sommets, un concept introduit pour formaliser la notion de cohésion interne au sein de sous-structures de graphes.
@@ -21,4 +23,26 @@ L'objet de ce rapport est l'étude du problème de l'existence d'une \textit{par
     Le problème de décision associé, consistant à déterminer si un graphe admet une telle partition, est noté \textsc{Satisfactory Graph Partition}.
 \end{definition}
 
+\begin{remark}\,\\
+    Intuitivement, le degré interne d'un sommet mesure combien de ses voisins appartiennent à la même partie de la partition que lui, tandis que le degré externe mesure combien de ses voisins appartiennent à l'autre partie.
+    
+    Une partition satisfaisante impose que chaque sommet ait au moins autant de voisins dans sa propre partie que dans l'autre, ce qui formalise une notion de \og{}cohésion\fg{} ou \og{}communauté\fg{} au sein du graphe.
+\end{remark}
+
 Dans la suite de ce rapport, on partira du principe que le lecteur est familier avec les notions de base de la théorie des graphes, telles que les cycles, les arbres, les graphes réguliers entres autres.
+
+\subsection{Objectifs du TER et attendus}
+
+L'objectif principal de ce TER est d'attaquer une conjecture sur l'existence de partitions satisfaisantes dans les graphes \(k\)-réguliers (on donnera plus de détails sur cette conjecture plus tard dans le rapport).
+A titre personnel, je pense que cette conjecture est vraie et ma recherche s'est donc portée sur la construction de graphes \(k\)-réguliers en essayant de les empêcher d'admettre une partition satisfaisante.
+
+Les attendus de ce TER sont les suivants:
+\begin{itemize}
+    \item Une revue de la littérature sur les partitions satisfaisantes et les graphes \(k\)-réguliers.
+    Cela permet notamment d'avoir le contexte nécessaire pour comprendre les enjeux de la conjecture et les méthodes utilisées pour l'attaquer.
+    \item Des résultats théoriques sur les conditions d'existence de partitions satisfaisantes dans les graphes \(k\)-réguliers.
+    Il s'agit notamment de démontrer les propriétés au début de la section~\ref{sec:results}. % chktex 44
+    \item Du code permettant d'experimenter avec les graphes \(k\)-réguliers.
+    Ce code doit permettre de tester l'existence et trouver des partitions satisfaisantes pour des graphes de petite taille, ainsi que de visualiser les résultats obtenus.
+\end{itemize}
+

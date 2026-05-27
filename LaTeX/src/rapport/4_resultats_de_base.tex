@@ -1,13 +1,3 @@
-
-% ============================================================
-% Ancienne version conservée en commentaire
-% ============================================================
-
-% \section{Résultats de bases}\label{sec:s_4}
-%
-% On présente dans cette section des preuves de résultats importants sur les partitions satisfaisantes,
-% notamment pour les graphes non connexes et les graphes \(k\)-réguliers pour \(k \leq 4\).
-
 % ============================================================
 \section{Résultats pour les graphes \(k\)-réguliers (\(k \leq 4\))}\label{sec:results}
 % ============================================================
@@ -21,44 +11,9 @@ On va montrer quelques résultats fondamentaux pour étudier la conjecture suiva
 \end{conjecture}
 
 % ============================================================
-% Ancienne sous-section conservée en commentaire
-% ============================================================
-
-% \subsection{Les graphes non connexes}\label{subsec:ss4_1}
-%
-% On montre dans cette partie que tout graphe non connexe admet une partition satisfaisante.
-
-% ============================================================
 \subsection{Réduction aux graphes connexes}
 % ============================================================
 
-% Ancienne version conservée:
-%
-% \begin{proposition}\label{prop:4_1_1}
-%     Si \(G\) est un graphe non connexe alors \(G\) admet une partition satisfaisante.
-% \end{proposition}
-%
-% \begin{proof}
-%     Soit \(A\) une composante connexe de \(G\) et \(B = V \setminus A\) le reste des sommets (non vide car \(G\) est non connexe).
-%     On considère la partition \((A, B)\) de \(V\).
-%
-%     Soit \(x\) un sommet de \(A\).
-%     On a \(d_A(x) \geq 1\) car \(A\) est connexe (et donc chaque sommet de \(A\) a au moins un voisin dans \(A\)).
-%
-%     On a aussi \(d_B(x) = 0\) car il n'y a pas d'arêtes entre \(A\) et \(B\).
-%
-%     Ainsi, pour tout sommet \(x\) de \(A\), on a \(d_A(x) > d_B(x)\).
-%
-%     Soit \(y\) un sommet de \(B\).
-%     On a \(d_A(y) = 0\) car il n'y a pas d'arêtes entre \(A\) et \(B\).
-%
-%     Comme \(d_X(y) \geq 0\) pour tout ensemble \(X\), on a \(d_B(y) \geq 0\).
-%
-%     Ainsi, pour tout sommet \(y\) de \(B\), on a \(d_B(y) \geq d_A(y)\).
-%
-%     On a donc montré que pour tout sommet \(x\) de \(V\), le degré interne de \(x\) est supérieur ou égal à son degré externe pour la partition \((A, B)\).
-%     Ainsi, \((A, B)\) est une partition satisfaisante de \(G\).
-% \end{proof}
 
 \begin{proposition}
     Tout graphe non connexe admet une partition satisfaisante.
@@ -85,28 +40,6 @@ On va montrer quelques résultats fondamentaux pour étudier la conjecture suiva
 
     La partition \((A, B)\) est donc satisfaisante.
 \end{proof}
-
-% Ancienne transition conservée:
-%
-% On considère dans la suite du rapport que tous les graphes sont connexes,
-% car les graphes non connexes admettent toujours une partition satisfaisante.
-
-Par conséquent, on se restreindra sans perte de généralité aux graphes connexes dans la suite.
-
-% ============================================================
-% Ancienne introduction conservée
-% ============================================================
-
-% \subsection{Les graphes \(k\)-réguliers}\label{subsec:ss4_2}
-%
-% On propose d'étudier dans la suite les graphes \(k\)-réguliers pour certains \(k\).
-% Ce sont ces graphes qui sont intéressants pour ce problème et qui sont au cœur
-% d'une des conjectures principales qu'on étudie dans ce rapport:
-%
-% \begin{conjecture}
-%     Soit \(k \in \bb N\).
-%     Tout graphe \(k\)-régulier, sauf un nombre fini d'entre eux, admet une partition satisfaisante.
-% \end{conjecture}
 
 % ============================================================
 \subsection{Analyse systématique par degré}
@@ -222,7 +155,7 @@ Supposons maintenant que \(C\) est de longueur au moins \(4\).
 
     \begin{itemize}
 
-        \item ces deux sommets doivent être opposés dans \(C\), sinon on obtiendrait un cycle plus petit ;
+        \item ces deux sommets doivent être opposés dans \(C\), sinon on obtiendrait un cycle plus petit;
 
         \item s'il existe un second sommet vérifiant la même propriété, alors soit:
         \[
@@ -251,35 +184,6 @@ Supposons maintenant que \(C\) est de longueur au moins \(4\).
 
 \end{itemize}
 
-% ============================================================
-% Ancienne preuve du cas \(k=4\) conservée
-% ============================================================
-
-% \subsubsection{Le cas \(k = 4\)}\label{subsubsec:ss4_2_4}
-%
-% On peut appliquer le même raisonnement que pour le cas \(k = 3\)
-% car ici aussi la sous-structure satisfaisante à trouver est un cycle.
-%
-% Cependant on propose ici une preuve différente utilisant les \(2\)-noyaux.
-%
-% \begin{definition}
-%     Soit \(G = (V, E)\) un graphe et \(p \in \bb N\).
-%     Un \(p\)-noyau de \(G\) est un ensemble de sommets
-%     \(S \subseteq V\) tel que:
-%     \[
-%         \deg_S(x) \geq p
-%     \]
-%     pour tout sommet \(x \in S\).
-% \end{definition}
-%
-% \begin{proposition}\label{prop:4_2_4}
-%     Tout graphe \(4\)-régulier qui n'est pas \(K_5\)
-%     admet une partition satisfaisante.
-% \end{proposition}
-%
-% \begin{proof}
-% ...
-% \end{proof}
 
 % ============================================================
 \subsubsection{Le cas \(k=4\): preuve par recherche locale}
@@ -289,7 +193,7 @@ Pour les graphes \(4\)-réguliers, on utilise une approche un peu différente.
 On va d'abord commencer par prouver le lemme suivant:
 
 \begin{lemma}
-    Tout graphe \(4\)-régulier connexe, à l'exception du graphe complet \(K_5\), contient au moins deux cycles sommets-disjoints.
+    Tout graphe \(4\)-régulier connexe, à l'exception du graphe complet \(K_5\), contient au moins deux cycles sommet-disjoints.
 \end{lemma}
 
 \begin{proof}

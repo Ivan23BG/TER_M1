@@ -1,43 +1,70 @@
 \begin{titlepage}
 \begin{center}
-\vspace{2cm}
-\includegraphics[width=0.4\textwidth]{./images/UM1.png}~\\[1cm]
-\vspace{1cm}
 
-% Title
+% --- LOGOS ---
+% \includegraphics[width=0.4\textwidth]{./images/UM1.png}~\\[1cm]
+\begin{minipage}{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./images/UM1.png}
+\end{minipage}\hfill
+\begin{minipage}{0.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{./images/FDS1.png}
+\end{minipage}
+
+\vfill
+
+% --- TITRE ---
 \hrule
 \vspace{.5cm}
 {\huge\bfseries{Partitions satisfaisantes dans les graphes}} % title of the report
 \vspace{.5cm}
-
 \hrule
+\vspace{.7cm}
+{\large Travail d'Étude et de Recherche --- Master 1 Algorithmique}\\
 
-\vspace{.5cm}
 
+\vspace{.8cm}
+% --- ILLUSTRATION TIKZ ---
 \input{./tikz/figure_page_garde.tex}
 
+\vfill
+
+% --- ACTEURS (AUTEUR & ENCADRANT) ---
+    % Aligner auteur et encadrant côte à côte avec des minipages évite que la page 
+    % ne devienne trop longue verticalement à cause des blocs empilés.
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \textsc{\textbf{Auteur}}\\[0.2cm]
+        Ivan LEJEUNE
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \textsc{\textbf{Encadrant}}\\[0.2cm]
+        Stéphane BESSY
+    \end{minipage}
+
+% \textsc{\textbf{Auteur}}\\
+% \vspace{.4cm}
+% \centering
+
+% LEJEUNE Ivan\\
 
 
-\vspace{1cm}
+% \vspace{1cm}
 
-\textsc{\textbf{Auteur}}\\
-\vspace{.4cm}
-\centering
+% \textsc{\textbf{Encadrant}}\\
+% \vspace{.4cm}
+% \centering
 
-LEJEUNE Ivan\\
+% % add your name here
+% BESSY Stéphane
 
+\vfill
+% --- DATE ---
+\displaydate{frontpagedate}
 
-\vspace{1cm}
-
-\textsc{\textbf{Encadrant}}\\
-\vspace{.4cm}
-\centering
-
-% add your name here
-BESSY Stéphane
-
-\vspace{3cm}
-
-\centering \displaydate{frontpagedate} % Dags dato
+% \centering \displaydate{frontpagedate} % Dags dato
 \end{center}
 \end{titlepage}
