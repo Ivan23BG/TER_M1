@@ -51,7 +51,23 @@ Un résultat important pour la recherche de noyaux dans un graphe \(k\)-régulie
     Si \(G\) contient un \(t\)-noyau de taille \(p\) alors \(G\) contient au moins deux \(t\)-noyaux disjoints.
 \end{proposition}
 
-% UNFINISHED PROOF
+\begin{proof}
+    Si \(G\) contient un \(t\)-noyau de taille \(p\), alors il y a \(p \cdot \left( \left\lfloor \frac{k}{2} \right\rfloor \right)\) arêtes sortant de ce noyau.
+
+    Rajouter un sommet non satisfait à ce noyau permet de réduire le nombre d'arêtes sortant du noyau d'au moins une arête à chaque fois.
+
+    Ainsi, si 
+    \begin{equation*}
+        \begin{aligned}
+            &p \cdot \left(\left\lfloor \frac{k}{2} \right\rfloor + 1\right) < n - p \\
+            \iff &p \cdot \left(\left\lfloor \frac{k}{2} \right\rfloor + 2\right) < n
+            \iff &p < \frac{n}{\left\lfloor \frac{k}{2} \right\rfloor + 2}
+        \end{aligned}
+    \end{equation*}
+
+    alors tous les sommets du graphe sont satisfaits et ainsi il existe une partition satisfaisante de \(G\), ce qui implique l'existence d'un second \(t\)-noyau disjoint du premier (car les deux parties de la partition forment chacune un \(t\)-noyau).
+
+\end{proof}
 
 Heureusement, un des résultats que nous avons obtenus est que pour un graphe d'une certaine taille, on n'a besoin que d'un seul \(t\)-noyau pour garantir l'existence d'une partition satisfaisante car l'existence d'un second noyau est assurée par le nombre d'arêtes du graphe.
 
