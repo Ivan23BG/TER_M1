@@ -1,3 +1,22 @@
 % ============================================================
 \section{Conclusion et perspectives}\label{sec:conclusion}
 % ============================================================
+
+Ce Travail d'Étude et de Recherche a permis de cartographier une partie du problème de la partition satisfaisante (\textsc{Satisfactory Graph Partition}) au sein des familles de graphes \(k\)-réguliers. 
+On a validé de manière constructive la conjecture pour les degrés mineurs. 
+Le cas \(k=3\) met en relief l'unicité des structures d'exception isolées (\(K_4\) et \(K_{3,3}\)), tandis que l'analyse du cas \(k=4\) a permis de formaliser une preuve rigoureuse fondée sur l'existence de deux cycles sommet-disjoints, étendant ainsi les résultats d'existence à l'exception près du graphe complet \(K_5\).
+
+L'exploration mathématique des degrés supérieurs (\(k \geq 5\)) a révélé un véritable saut de complexité. 
+L'émergence de la non-linéarité des structures de \(t\)-noyaux implique qu'un simple cycle ne suffit plus à garantir l'ancrage d'une partition stable.
+
+Néanmoins, l'approche algorithmique hybride conçue lors de ce TER — combinant extraction gloutonne de noyaux denses et optimisation locale de la coupe transversale — confirme expérimentalement l'absence de contre-exemple de petite taille pour \(k=5\).
+
+De plus, la preuve d'existence d'un deuxième \(t\)-noyau disjoint à partir d'un premier noyau de taille suffisamment petite montre aussi que si on peut garantir l'existence de noyaux d'une certaine taille dans les graphes \(k\)-réguliers à partir d'une certaine taille alors il n'y a bien qu'un nombre fini de contre-exemples pour ce \(k\).
+
+Plusieurs perspectives s'ouvrent à l'issue de ce travail :
+\begin{enumerate}
+    \item \textbf{Généralisation de la recherche de noyaux:} Approfondir la caractérisation combinatoire de la Proposition~\ref{prop:kernel_size} afin de borner l'ordre minimal \(n\) à partir duquel l'existence d'un premier \(t\)-noyau est garantie.
+    \item \textbf{Optimisation algorithmique:} Remplacer les heuristiques de recherche locale par un solveur SAT ou des formulations en programmation linéaire en nombres entiers (PLNE) afin d'étendre la vérification systématique de la conjecture à des graphes d'ordre plus élevé.
+    \item \textbf{Variantes combinatoires:} Étudier l'extension du problème aux partitions équilibrées (\textit{Balanced Satisfactory Partitions}), où les cardinaux des sous-ensembles vérifient \(||A| - |B|| \leq 1\), un sous-problème aux applications directes en partitionnement de réseaux de neurones.
+\end{enumerate}
+

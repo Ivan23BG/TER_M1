@@ -46,30 +46,30 @@ Cependant, pour \(k = 5\), un 3-noyau correspond à un sous-graphe de degré min
 Un tel sous-graphe doit nécessairement contenir une structure plus complexe que les simples cycles, et ces structures sont plus difficiles à identifier et à manipuler dans le cadre d'une preuve d'existence mais surtout dans le cadre d'une recherche algorithmique.
 
 Un résultat important pour la recherche de noyaux dans un graphe \(k\)-régulier est le suivant:
-\begin{proposition}
+\begin{proposition}\label{prop:kernel_size}
     Soit \(G = (V, E)\) un graphe \(k\)-régulier de taille \(n\) et \(t = \left\lceil \frac{k}{2} \right\rceil\).
-    Si \(G\) contient un \(t\)-noyau de taille \(p\) alors \(G\) contient au moins deux \(t\)-noyaux disjoints.
+    Si \(G\) contient un \(t\)-noyau de taille \(p < \frac{n}{\left\lceil \frac{k}{2} \right\rceil + 1}\) alors \(G\) contient au moins deux \(t\)-noyaux disjoints.
 \end{proposition}
 
 \begin{proof}
     Si \(G\) contient un \(t\)-noyau de taille \(p\), alors il y a \(p \cdot \left( \left\lfloor \frac{k}{2} \right\rfloor \right)\) arêtes sortant de ce noyau.
 
     Rajouter un sommet non satisfait à ce noyau permet de réduire le nombre d'arêtes sortant du noyau d'au moins une arête à chaque fois.
-
-    Ainsi, si 
+    Ainsi, si le nombre d'arêtes sortant du noyau est strictement inférieur au nombre de sommets restants alors on peut créer une partition satisfaisante en ajoutant des sommets non satisfaits au noyau jusqu'à ce que tous les sommets soient satisfaits.
+    Autrement dit:
     \begin{equation*}
         \begin{aligned}
-            &p \cdot \left(\left\lfloor \frac{k}{2} \right\rfloor + 1\right) < n - p \\
-            \iff &p \cdot \left(\left\lfloor \frac{k}{2} \right\rfloor + 2\right) < n
-            \iff &p < \frac{n}{\left\lfloor \frac{k}{2} \right\rfloor + 2}
+            &p \cdot \left\lfloor \frac{k}{2} \right\rfloor < n - p \\
+            \iff & p \cdot \left\lceil \frac{k}{2} \right\rceil < n - p \\
+            \iff & p \cdot \left\lceil \frac{k}{2} \right\rceil + p < n \\
+            \iff & p \cdot \left( \left\lceil \frac{k}{2} \right\rceil + 1 \right) < n \\
+            \iff & p < \frac{n}{\left\lceil \frac{k}{2} \right\rceil + 1}
         \end{aligned}
     \end{equation*}
 
-    alors tous les sommets du graphe sont satisfaits et ainsi il existe une partition satisfaisante de \(G\), ce qui implique l'existence d'un second \(t\)-noyau disjoint du premier (car les deux parties de la partition forment chacune un \(t\)-noyau).
-
+    Alors tous les sommets du graphe sont satisfaits et ainsi il existe une partition satisfaisante de \(G\), ce qui implique l'existence d'un second \(t\)-noyau disjoint du premier (car les deux parties de la partition forment chacune un \(t\)-noyau).
 \end{proof}
 
-Heureusement, un des résultats que nous avons obtenus est que pour un graphe d'une certaine taille, on n'a besoin que d'un seul \(t\)-noyau pour garantir l'existence d'une partition satisfaisante car l'existence d'un second noyau est assurée par le nombre d'arêtes du graphe.
 
 \subsection{Le cas \(k = 6\) et au-delà}
 

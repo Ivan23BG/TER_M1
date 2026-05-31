@@ -14,7 +14,13 @@ Ce code nous a permis de tester différentes hypothèses, de construire des exem
 On a commencé par créer des algorithmes de base capables de trouver des partitions satisfaisantes pour des graphes de petite taille en utilisant des méthodes différentes.
 
 La première méthode est le brute-force.
-Etnant donné qu'il y a conséquemment plus de graphes admettant une partition satisfaisante que de graphes n'en admettant pas, on peut partir du principe qu'en général, il existe une partition satisfaisante pour un graphe donné et celle-ci peut être trouvée en testant aléatoirement des partitions du graphe:
+Etnant donné qu'il y a conséquemment plus de graphes admettant une partition satisfaisante que de graphes n'en admettant pas, on peut partir du principe qu'en général, il existe une partition satisfaisante pour un graphe donné et celle-ci peut être trouvée en testant aléatoirement des partitions du graphe.
+Si le code ne trouve pas de partition satisfaisante après un nombre raisonnable de tentatives, on peut procéder à une analyse plus approfondie du graphe par exemple en testant toutes les partitions possibles de manière exhaustive.
+
+L'algorithme de recherche locale (Glouton) explicité ci-après repose sur le principe de la minimisation de la coupe généralisée. 
+Partant d'une partition initiale \((A,B)=(N_1,V \setminus N_1)\), le basculement d'un sommet non satisfait réduit strictement le cardinal de la coupe. 
+Puisque \(|E|\) est fini, la convergence vers un minimum local (qui correspond ici à une partition satisfaisante) est garantie en au plus \(|E|=O(k\cdot n)\) itérations. 
+Chaque étape de mise à jour des degrés dynamiques s'exécute en temps \(O(k)\), conférant à notre procédure de recherche locale une complexité de \(O(k^2 \cdot n)\), ce qui améliore drastiquement l'approche par force brute dont la complexité est en \(O(2^n)\).
 
 \pythonFile{./code/brute_force.py}
 
