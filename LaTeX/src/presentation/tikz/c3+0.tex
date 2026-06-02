@@ -1,0 +1,27 @@
+\ffigbox[\FBwidth]{%
+\caption{\centering Graphe \(G\) avec 3-cycle \(C\)}\label{fig:c3_plus_0}
+}{
+    \fbox{
+        \begin{tikzpicture}[scale=1, main node/.style={circle, draw, fill=blue!20, inner sep=1pt, font=\scriptsize, minimum size=5mm, text=black}]
+            
+            % construction de C
+            \pgfmathsetmacro{\r}{2/sqrt(3)}
+            \node[main node, fill=green!20] (c0) at (0:\r) {\(c_0\)};      % angle 0°, radius 2
+            \node[main node, fill=green!20] (c1) at (120:\r) {\(c_1\)};    % 120°
+            \node[main node, fill=green!20] (c2) at (240:\r) {\(c_2\)};    % 240°
+
+            \draw[draw=green] (c0) -- (c1);
+            \draw[draw=green] (c1) -- (c2);
+            \draw[draw=green] (c2) -- (c0);
+
+            
+            % ellipse autour de G
+            \node[ellipse, draw, thick, fill=blue!20,
+                minimum width=2.6cm, minimum height=3.6cm] (Gnode) at (4,0) {\(G \setminus C\)};
+            % lignes vers G (au lieu de vers le haut)
+            \draw[draw=blue, dashed] (c0) to (Gnode);
+            \draw[draw=blue, dashed] (c1) to (Gnode);
+            \draw[draw=blue, dashed] (c2) to (Gnode);
+        \end{tikzpicture}
+    }
+}

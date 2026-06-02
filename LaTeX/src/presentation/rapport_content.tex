@@ -88,6 +88,11 @@
   \vskip0pt%
 }
 
+\input{./local_header.tex}
+\input{../assets/tikz/base.tex}
+
+
+
 % ---------- Navigation symbols ----------
 \setbeamertemplate{navigation symbols}{}
 
@@ -106,6 +111,10 @@
 % ============================================================
 \begin{frame}[plain]
   \titlepage
+  \vspace{-2.8cm}
+  \includegraphics[height=1.5cm]{./images/UM1.png} %
+  \hfill
+  \includegraphics[height=1.5cm]{./images/FDS1.png} %
 \end{frame}
 
 % ============================================================
@@ -253,7 +262,7 @@
 % ============================================================
 
 \begin{frame}{La conjecture centrale}
-  \begin{alertblock}{Conjecture (ouverte pour $k \geq 5$)}
+  \begin{alertblock}{Conjecture (Matt Devos, 2009)}
     Pour tout entier $k$, tous les graphes $k$-r\'eguliers, \textbf{sauf un nombre fini d'exceptions}, admettent une partition satisfaisante.
   \end{alertblock}
 
@@ -306,36 +315,30 @@
 \end{frame}
 
 \begin{frame}{Cas $k = 3$ --- analyse par le plus petit cycle}
-  \begin{block}{Strat\'egie}
-    Soit $C$ le plus petit cycle de $G$ (graphe 3-r\'egulier connexe).
-  \end{block}
-
-  \medskip
-  \begin{columns}[T]
-    \column{0.48\textwidth}
-    \textbf{Si $|C| = 3$ (triangle) :}
-    \begin{itemize}
-      \item Voisin reli\'e aux 3 sommets $\Rightarrow$ $G \simeq K_4$ \alert{(exception)}
-      \item Voisin reli\'e \`a 2 sommets $\Rightarrow$ \'elargir $A = C \cup \{x, \ldots\}$ donne une partition satisfaisante
-      \item Voisins reli\'es \`a $\leq 1$ sommet $\Rightarrow$ $(C, V\!\setminus\!C)$ satisfaisante
-    \end{itemize}
-
-    \column{0.48\textwidth}
-    \textbf{Si $|C| \geq 4$ :}
-    \begin{itemize}
-      \item Voisin reli\'e \`a 3 sommets $\Rightarrow$ cycle plus court, \alert{contradiction}
-      \item Voisin reli\'e \`a $\leq 1$ sommet $\Rightarrow$ $(C, V\!\setminus\!C)$ satisfaisante
-      \item Voisin reli\'e \`a 2 sommets oppos\'es : soit $G \simeq K_{3,3}$ \alert{(exception)}, soit partition satisfaisante en ajoutant ces sommets
-    \end{itemize}
-  \end{columns}
-
-  \bigskip
-  \begin{exampleblock}{Bilan $k = 3$}
-    Deux exceptions : $K_4$ et $K_{3,3}$. Tous les autres graphes 3-r\'eguliers connexes admettent une partition satisfaisante.
-  \end{exampleblock}
+  \,%
 \end{frame}
 
-\begin{frame}{Cas $k = 4$ --- lemme cl\'e}
+\begin{frame}{Cas $k = 3$ --- analyse par le plus petit cycle}
+  \input{./tikz/c3+3.tex}
+\end{frame}
+
+\begin{frame}{Cas $k = 3$ --- analyse par le plus petit cycle}
+  \input{./tikz/c3+2.tex}
+\end{frame}
+
+\begin{frame}{Cas $k = 3$ --- analyse par le plus petit cycle}
+  \begin{figure}[H]
+      \begin{floatrow}
+
+          \input{./tikz/c3+2+0.tex}
+
+          \input{./tikz/c3+2+2.tex}
+
+      \end{floatrow}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{Cas $k = 4$}
   \begin{lemma}
     Tout graphe 4-r\'egulier connexe, sauf $K_5$, contient \textbf{au moins deux cycles sommet-disjoints}.
   \end{lemma}
@@ -348,7 +351,7 @@
       \item Comptage des ar\^etes $C \leftrightarrow T$ (exactement $2c$) :
         $\displaystyle\sum_{u \in T} \dint(u) = 4t - 2c$
       \item Combinaison : $c \geq t+1$
-      \item Toute feuille $u \in T$ a $\geq 3$ voisins sur $C$, cr\'eant un cycle de longueur $\leq \lfloor c/3 \rfloor + 2 < c$ pour $c \geq 4$.
+      \item Toute feuille $u \in T$ a $\geq 3$ voisins sur $C$, cr\'eant un cycle de longueur $\leq \lfloor c/3 \rfloor + 2$.
       \item La seule possibilit\'e : $c = 3$, $t \leq 2$, $|V| \leq 5 \Rightarrow G \simeq K_5$. \alert{Contradiction.}
     \end{enumerate}
   \end{proof}
@@ -363,12 +366,12 @@
     Soient $C_1, C_2$ deux cycles sommet-disjoints (lemme pr\'ec\'edent).
     \medskip
     \begin{enumerate}
-      \item Poser $A = \{v \in V : v \in C_1 \text{ ou } |N(v) \cap C_1| \geq 2\}$, $\;B = V \setminus A$.
-      \item Pour tout $x \in A$ : $\dint(x) \geq 2$ et $\dext(x) \leq 2$ (4-r\'egularit\'e). \checkmark
+      \item Poser $A = C_1 \text{ ou } C_2$, $\;B = V \setminus A$.
+      \item Pour tout $x \in A$ : $\dint(x) \geq 2$ et $\dext(x) \leq 2$ (4-r\'egularit\'e).
       \item Tant qu'un sommet de $B$ est non satisfait : le d\'eplacer vers $A$.
         \begin{itemize}
-          \item Chaque d\'eplacement r\'eduit strictement la coupe $\Rightarrow$ terminaison. \checkmark
-          \item $C_2 \subset B$ reste intact : $B$ n'est jamais vid\'e. \checkmark
+          \item Chaque d\'eplacement r\'eduit strictement la coupe $\Rightarrow$ terminaison.
+          \item $C_2 \subset B$ reste intact : $B$ n'est jamais vid\'e.
         \end{itemize}
     \end{enumerate}
   \end{proof}
@@ -439,22 +442,19 @@
     \textit{Id\'ee de preuve :} comptage fin des ar\^etes traversant la partition $\Rightarrow$ existence de noyaux disjoints.
   \end{block}
 
-  \bigskip
+  \smallskip
 
   \begin{columns}[T]
     \column{0.48\textwidth}
     \begin{alertblock}{Cas $k = 5$ et $k \geq 7$}
       \begin{itemize}
         \item Toujours \textbf{ouverts} (mai 2026)
-        \item Aucun contre-exemple trouv\'e pour les petits graphes
         \item Complexit\'e croissante des $t$-noyaux n\'ecessaires
       \end{itemize}
     \end{alertblock}
-
     \column{0.48\textwidth}
     \begin{block}{R\'ecapitulatif}
       \begin{tabular}{@{}lll@{}}
-        \toprule
         $k$ & Exceptions & Statut \\
         \midrule
         1 & $K_2$ & Prouv\'e \\
@@ -464,7 +464,6 @@
         5 & ? & \alert{Ouvert} \\
         6 & $\leq 11$ sommets & Prouv\'e \\
         $\geq 7$ & ? & \alert{Ouvert} \\
-        \bottomrule
       \end{tabular}
     \end{block}
   \end{columns}
@@ -577,7 +576,7 @@ def satisfying_partition_from_cycles(G, C1, C2):
       \item Formalisation rigoureuse via le concept de $t$-noyau.
       \item Preuve du lemme des deux cycles sommet-disjoints pour $k=4$.
       \item Condition suffisante ($p < n/(\lceil k/2 \rceil + 1)$) pour l'existence d'un second noyau disjoint.
-      \item Exp\'erimentation algorithmique : aucun contre-exemple pour $k=5$ parmi les petits graphes.
+      \item Exp\'erimentation algorithmique : aucun nouveau résultat pour $k \geq 5$, mais validation des heuristiques sur les petits graphes.
     \end{itemize}
   \end{block}
 
@@ -604,7 +603,7 @@ def satisfying_partition_from_cycles(G, C1, C2):
 
     \item \textbf{Partitions \'equilibr\'ees}
 
-    \'Etudier les \emph{Balanced Satisfactory Partitions} o\`u $\bigl||A| - |B|\bigr| \leq 1$, avec des applications directes en partitionnement de r\'eseaux de neurones.
+    \'Etudier les \emph{Balanced Satisfactory Partitions} o\`u $\bigl||A| - |B|\bigr| \leq 1$ ou d'autres variantes du probl\`eme.
   \end{enumerate}
 
   \bigskip

@@ -1,0 +1,33 @@
+\ffigbox[\FBwidth]{%
+\caption{\centering Graphe \(G\) avec un 3-cycle \(C\) et un 2-sommet \(x\) puis un 2-sommet \(y\)}\label{fig:c3_plus_2_plus_2}
+}{
+    \fbox{
+        \begin{tikzpicture}[scale=1, main node/.style={circle, draw, fill=blue!20, inner sep=1pt, font=\scriptsize, minimum size=5mm, text=black}]
+            
+            % construction de C (réorganisé)
+            \node[main node, fill=green!20] (c0) at (0, 0) {\(c_0\)};
+            \node[main node, fill=green!20] (c1) at (0, 2) {\(c_1\)};
+            \node[main node, fill=green!20] (c2) at (2, 0) {\(c_2\)};
+            
+            \draw[draw=green] (c0) -- (c1);
+            \draw[draw=green] (c1) -- (c2);
+            \draw[draw=green] (c2) -- (c0);
+
+            % rajout du 2-sommet
+            \node[main node, fill=green!20] (x) at (2, 2) {\(x\)};
+            \node[main node, fill=blue!20] (y) at (3, 1) {\(y\)};
+            
+            \draw[draw=green] (x) -- (c0);
+            \draw[draw=green] (x) -- (c1);
+            \draw[draw=blue] (y) -- (x);
+            \draw[draw=blue] (y) -- (c2);
+
+            % ellipse autour de G
+            \node[ellipse, draw, thick, fill=blue!20,
+                minimum width=2.6cm, minimum height=3.6cm] (Gnode) at (5,1) {\(G \setminus A\)};
+            % lignes vers G (au lieu de vers le haut)
+            
+            \draw[draw=blue, dashed] (y) -- (Gnode);
+        \end{tikzpicture}
+    }
+}
